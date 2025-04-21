@@ -1,0 +1,33 @@
+{
+  "info": {
+    "name": "SigmaBot API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Teste Rota GET /",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:4000/"
+      }
+    },
+    {
+      "name": "Enviar Mensagem (TypeBot Webhook)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone\": \"5511999999999\",\n  \"text\": \"Como rastrear meu pedido?\",\n  \"apiKey\": \"sua_chave_typebot\"\n}"
+        },
+        "url": "http://localhost:4000/api/typebot/webhook"
+      }
+    }
+  ]
+}

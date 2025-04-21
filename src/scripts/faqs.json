@@ -1,0 +1,916 @@
+{
+    "faq": [
+        {
+            "pergunta": "Como acessar o Dashboard e quais perfis têm permissão para visualizá-lo?",
+            "resposta": "Para acessar o Dashboard, vá ao menu do sistema e clique em 'Dashboard'. Essa ferramenta está disponível apenas para os perfis de usuário Admin e Supervisor."
+        },
+        {
+            "pergunta": "Quais informações são exibidas no Dashboard por padrão?",
+            "resposta": "Por padrão, o Dashboard exibe informações relativas ao dia atual, como o número de contatos sendo atendidos ('Atendendo'), pessoas aguardando atendimento ('Aguardando in'), usuários online ('Online em'), atendimentos concluídos ('Concluídos em'), total de contatos na agenda ('Contatos'), mensagens recebidas/enviadas ('Recebidas/Enviadas'), tempo médio de atendimento e espera ('Média/Espera') e a data de vencimento da parcela do sistema ('Vencimento em')."
+        },
+        {
+            "pergunta": "Como personalizar o filtro de datas no Dashboard?",
+            "resposta": "Ao acessar o Dashboard, você pode personalizar o filtro de datas para visualizar dados de períodos específicos, alterando a exibição padrão que mostra informações do dia atual."
+        },
+        {
+            "pergunta": "O que é possível visualizar no gráfico 'Visão Geral do Período'?",
+            "resposta": "O gráfico 'Visão Geral do Período' exibe o total geral de atendimentos no período selecionado. As barras representam os atendimentos diários ou horários, dependendo do intervalo escolhido."
+        },
+        {
+            "pergunta": "Como o gráfico 'Atendimentos por Usuário' pode ajudar na gestão?",
+            "resposta": "O gráfico 'Atendimentos por Usuário' apresenta, em formato de pizza, a quantidade de atendimentos realizados por cada atendente no período escolhido, facilitando a identificação dos usuários mais ativos."
+        },
+        {
+            "pergunta": "Quais detalhes sobre os usuários cadastrados estão disponíveis no Dashboard?",
+            "resposta": "No Dashboard, é possível visualizar uma lista de usuários cadastrados no sistema, organizada por nome, com detalhes como a média de avaliações de atendimento recebidas, o tempo médio de atendimento e o status atual (logado ou não)."
+        },
+        {
+            "pergunta": "O que é o módulo 'Equipe' e para que serve?",
+            "resposta": "O módulo 'Equipe' permite cadastrar e editar todos os usuários da plataforma. Nele, é possível definir permissões de acesso, que influenciam diretamente no nível de usabilidade de cada usuário dentro do sistema."
+        },
+        {
+            "pergunta": "Como acessar o módulo 'Equipe'?",
+            "resposta": "Para acessar o módulo 'Equipe', vá até o menu principal do sistema e selecione a opção 'Equipe'. Nessa tela, você verá uma lista de usuários cadastrados e poderá realizar ações como edição ou exclusão de usuários."
+        },
+        {
+            "pergunta": "Quais campos são necessários ao criar um novo usuário?",
+            "resposta": "Ao criar um novo usuário, os seguintes campos devem ser preenchidos: Nome, Senha, Número do WhatsApp (formato internacional), E-mail, Perfil (Administrador, Usuário padrão ou Supervisor), Filas, Conexão padrão, Mensagem de despedida e Horário inicial e final de acesso ao sistema."
+        },
+        {
+            "pergunta": "Quais são os perfis de usuário disponíveis no sistema?",
+            "resposta": "Os perfis de usuário disponíveis são: Administrador (acesso total ao sistema), Usuário padrão (acesso limitado aos módulos de atendimento) e Supervisor (acesso aos módulos 'Kamba Visão Geral' e 'Kamba Filas', além das permissões do usuário padrão)."
+        },
+        {
+            "pergunta": "Como configurar as filas de atendimento para um usuário?",
+            "resposta": "Ao cadastrar ou editar um usuário, no campo 'Filas', defina quais filas de atendimento o usuário poderá visualizar e atender."
+        },
+        {
+            "pergunta": "O que acontece se o horário inicial e final de acesso não for configurado para um usuário?",
+            "resposta": "Se o horário inicial e final de acesso não for configurado, o login do usuário não será restrito por horário, permitindo acesso ao sistema a qualquer momento, ou você pode configurar o intervalo das 00:00 às 23:59."
+        },
+        {
+            "pergunta": "Como pesquisar um usuário específico na lista de equipe?",
+            "resposta": "Na tela do módulo 'Equipe', utilize a caixa de busca localizada acima da lista de usuários para encontrar rapidamente um usuário específico."
+        },
+        {
+            "pergunta": "Posso alterar a senha de um usuário já cadastrado?",
+            "resposta": "Sim, ao clicar em 'Editar' no perfil de um usuário, você será direcionado à mesma janela de cadastro, onde poderá alterar a senha do usuário."
+        },
+        {
+            "pergunta": "O que ocorre se o campo 'Mensagem de despedida' for deixado em branco?",
+            "resposta": "Se o campo 'Mensagem de despedida' for deixado em branco, o sistema utilizará automaticamente a mensagem de despedida configurada na conexão associada ao usuário."
+        },
+        {
+            "pergunta": "Como salvar as informações após editar ou criar um novo usuário?",
+            "resposta": "Após preencher ou editar todas as informações do usuário, clique no botão 'Salvar' para validar o cadastro ou as alterações realizadas."
+        },
+        {
+            "pergunta": "Como exportar contatos da plataforma para uma planilha do Excel?",
+            "resposta": "Para exportar contatos, vá até o menu 'Contatos', clique em 'Exportar' e depois em 'Exportar' novamente. Você pode exportar por tags ou setores. Caso nenhuma opção seja selecionada, a plataforma exportará toda a base de contatos. A planilha será gerada com separação por vírgulas, então será necessário converter os dados em colunas no Excel usando a função 'Texto para Colunas'."
+        },
+        {
+            "pergunta": "Quais são as etapas para importar contatos com nome, telefone e e-mail?",
+            "resposta": "Crie uma planilha com três colunas: nome, telefone e e-mail (todas em minúsculo). Insira os dados respeitando a formatação correta dos números. Salve a planilha, vá até 'Contatos', 'Importar e Exportar', clique em 'Importar Arquivo' e selecione sua planilha. Os dados serão inseridos automaticamente."
+        },
+        {
+            "pergunta": "Como atualizar apenas o nome de contatos já existentes na plataforma?",
+            "resposta": "Crie uma planilha com as colunas 'nome', 'telefone' e adicione uma coluna extra chamada 'atualizar'. Na coluna 'atualizar', insira o número 1 para indicar que apenas o nome será alterado. Importe a planilha seguindo o mesmo processo usado na importação padrão."
+        },
+        {
+            "pergunta": "Como atualizar tanto o nome quanto o e-mail de contatos já existentes?",
+            "resposta": "Crie uma planilha semelhante à da etapa de atualização de nome, mas na coluna 'atualizar', insira o número 2 para indicar que tanto o nome quanto o e-mail devem ser atualizados. Realize a importação da mesma forma."
+        },
+        {
+            "pergunta": "Como importar contatos com tags associadas?",
+            "resposta": "Crie uma planilha com as colunas 'nome', 'telefone', 'whatsapp', 'tag' e 'atualizar'. Na coluna 'whatsapp', insira o ID da conexão; na coluna 'tag', insira o ID da tag desejada; e na coluna 'atualizar', use o número 4. Salve a planilha e faça a importação duas vezes: a primeira para criar o contato e a segunda para aplicar a tag."
+        },
+        {
+            "pergunta": "Como importar contatos atribuindo-os a uma carteira de cliente específica?",
+            "resposta": "Crie uma planilha com as colunas 'nome', 'telefone', 'whatsapp', 'carteira' e 'atualizar'. Na coluna 'carteira', insira o ID do vendedor; e na coluna 'atualizar', use o número 3. Salve a planilha e faça a importação duas vezes: a primeira para criar o contato e a segunda para aplicar a carteira. Certifique-se de que a funcionalidade de carteira esteja habilitada no sistema."
+        },
+        {
+            "pergunta": "Qual é o limite de contatos por importação?",
+            "resposta": "Existe um limite de contatos por importação que deve ser respeitado para garantir a integridade do banco de dados. Consulte a documentação ou suporte da plataforma para obter o número exato."
+        },
+        {
+            "pergunta": "Quem pode realizar a exportação e importação de contatos?",
+            "resposta": "Apenas usuários com perfil de administrador podem realizar os processos de exportação e importação de contatos."
+        },
+        {
+            "pergunta": "O que acontece se um número inválido for importado?",
+            "resposta": "Se um número inválido for importado, ele precisará ser excluído manualmente, pois o número é o ID único de identificação e não pode ser alterado posteriormente."
+        },
+        {
+            "pergunta": "Como formatar corretamente os números de telefone na planilha?",
+            "resposta": "Os números de telefone devem seguir o formato internacional, incluindo o código do país (por exemplo, 55 para o Brasil), seguido pelo DDD e número do telefone, sem espaços, barras ou caracteres adicionais. Em estados onde não se aplica o nono dígito, ele não deve ser incluído."
+        },
+        {
+            "pergunta": "O que é o módulo de Filas e Chatbot e para que serve?",
+            "resposta": "O módulo de Filas e Chatbot permite criar departamentos e automações que o robô realizará durante os atendimentos. Ele ajuda a reduzir o tempo de espera dos clientes com respostas rápidas e automáticas, além de organizar os atendimentos por filas específicas."
+        },
+        {
+            "pergunta": "Quem pode acessar e configurar o módulo de Filas e Chatbot?",
+            "resposta": "Apenas administradores da plataforma podem acessar e configurar o módulo de Filas e Chatbot."
+        },
+        {
+            "pergunta": "Como adicionar uma nova fila no sistema?",
+            "resposta": "Para adicionar uma nova fila, vá até o menu lateral, clique em 'Filas e Chatbot', depois em 'Adicionar Fila'. Preencha os campos na aba 'Dados da Fila', como Nome, Ordenação no bot, Cor, Mensagem de saudação, e outras configurações necessárias. Salve para concluir."
+        },
+        {
+            "pergunta": "O que é a 'Ordenação no bot' ao criar uma fila?",
+            "resposta": "A 'Ordenação no bot' define a ordem de exibição da fila no menu do chatbot. A primeira fila deve ser numerada como '1', seguida de números crescentes para as demais filas."
+        },
+        {
+            "pergunta": "Como configurar o rodízio de atendentes em uma fila?",
+            "resposta": "Ao criar ou editar uma fila, na aba 'Dados da Fila', ative a opção 'Rodízio de atendentes e tempo de escala'. Isso distribuirá automaticamente os atendimentos entre os atendentes com base em um tempo de escala definido."
+        },
+        {
+            "pergunta": "O que é a opção 'Notificar operador no WhatsApp'?",
+            "resposta": "Ao ativar essa opção, o sistema enviará uma mensagem automática ao atendente cadastrado na plataforma quando houver um novo atendimento. Para isso, o atendente precisa ter um número de WhatsApp válido associado ao seu perfil."
+        },
+        {
+            "pergunta": "Como redirecionar automaticamente um atendimento para outra fila?",
+            "resposta": "Na aba 'Dados da Fila', habilite a opção 'Mover fila' e configure para qual fila o atendimento será redirecionado automaticamente."
+        },
+        {
+            "pergunta": "O que é a aba 'Horários de Atendimento' ao criar uma fila?",
+            "resposta": "A aba 'Horários de Atendimento' permite definir os dias e horários de funcionamento da organização. Esses horários serão usados para envio da mensagem fora do expediente, caso um cliente entre em contato fora do horário configurado."
+        },
+        {
+            "pergunta": "Como adicionar palavras-chave e gatilhos a uma fila?",
+            "resposta": "Ao criar ou editar uma fila, configure as palavras-chave e gatilhos na aba 'Dados da Fila'. Se o cliente digitar uma dessas palavras no chat, ele será automaticamente redirecionado para a fila correspondente. Separe várias palavras por vírgulas, sem espaços."
+        },
+        {
+            "pergunta": "Como criar opções no fluxo do chatbot?",
+            "resposta": "Após salvar a fila, edite-a novamente, vá até a aba 'Opções' e clique em 'Adicionar'. Escolha o tipo de ação desejado (Texto, Atendente, Fila, Externo/API, Arquivo ou Finalizar), insira o texto necessário e salve."
+        },
+        {
+            "pergunta": "O que acontece se o cliente entrar em contato fora do horário de funcionamento?",
+            "resposta": "Se o cliente entrar em contato fora do horário de funcionamento configurado, ele receberá automaticamente a 'Mensagem fora do expediente', desde que essa funcionalidade esteja ativada nas configurações do sistema."
+        },
+        {
+            "pergunta": "Como usar a opção 'Chatbot externo' em uma fila?",
+            "resposta": "Ao criar ou editar uma fila, marque a opção 'Chatbot externo' se desejar integrar essa fila a um chatbot externo. Isso permitirá que o sistema utilize APIs externas para gerenciar os atendimentos dessa fila."
+        },
+        {
+            "pergunta": "Como adicionar um arquivo de capa a uma fila?",
+            "resposta": "Na aba 'Dados da Fila', use o campo 'Arquivo de capa' para enviar um arquivo previamente adicionado ao sistema pelo gerenciador de arquivos. Esse arquivo será enviado automaticamente ao cliente quando ele selecionar essa fila."
+        },
+        {
+            "pergunta": "Como excluir uma fila já criada?",
+            "resposta": "Para excluir uma fila, vá até o menu 'Filas e Chatbot', localize a fila desejada na lista e clique no ícone de lixeira ao lado dela."
+        },
+        {
+            "pergunta": "É possível adicionar múltiplas etapas dentro das opções do chatbot?",
+            "resposta": "Sim, é possível adicionar múltiplas etapas dentro das opções do chatbot. Após criar uma opção inicial, você pode incluir subopções e continuar expandindo o fluxo conforme necessário."
+        },
+        {
+            "pergunta": "O que é o Gerenciador de Arquivos e para que serve?",
+            "resposta": "O Gerenciador de Arquivos é um módulo onde você pode adicionar arquivos para utilização em conexões, filas, chatbot e outros módulos do sistema. Ele facilita o armazenamento e gerenciamento de arquivos que podem ser usados em diferentes partes da plataforma."
+        },
+        {
+            "pergunta": "Quem pode acessar e utilizar o Gerenciador de Arquivos?",
+            "resposta": "Apenas administradores da plataforma têm permissão para acessar e utilizar o Gerenciador de Arquivos."
+        },
+        {
+            "pergunta": "Como acessar o módulo Gerenciador de Arquivos?",
+            "resposta": "Para acessar o Gerenciador de Arquivos, vá até o menu lateral da plataforma e clique na opção 'Gerenciador de Arquivos'."
+        },
+        {
+            "pergunta": "Como adicionar um novo arquivo ao sistema?",
+            "resposta": "No Gerenciador de Arquivos, clique no botão 'Adicionar Arquivo'. Insira um identificador (nome) para facilitar a localização futura, anexe o arquivo desejado do seu computador e clique em 'Salvar'. O arquivo estará disponível para uso no sistema."
+        },
+        {
+            "pergunta": "Como pesquisar um arquivo específico no Gerenciador de Arquivos?",
+            "resposta": "Utilize a caixa de busca localizada na parte superior da tela do Gerenciador de Arquivos para encontrar rapidamente um arquivo pelo seu identificador ou nome."
+        },
+        {
+            "pergunta": "É possível editar ou excluir arquivos no Gerenciador de Arquivos?",
+            "resposta": "Sim, ao lado de cada arquivo cadastrado, há opções para edição ou exclusão. Clique em 'Editar' para alterar o identificador ou 'Excluir' para remover o arquivo do sistema."
+        },
+        {
+            "pergunta": "Quais são os tipos de arquivos que podem ser adicionados ao Gerenciador de Arquivos?",
+            "resposta": "Não há uma restrição específica mencionada no documento, mas geralmente são arquivos que podem ser usados em conexões, filas, chatbot e outros módulos, como imagens, documentos ou arquivos de mídia."
+        },
+        {
+            "pergunta": "Como os arquivos adicionados são utilizados em outros módulos?",
+            "resposta": "Uma vez adicionados ao Gerenciador de Arquivos, os arquivos podem ser selecionados e utilizados em módulos como conexões, filas e chatbot, conforme necessário, durante a configuração desses recursos."
+        },
+        {
+            "pergunta": "O que acontece se um arquivo for excluído do Gerenciador de Arquivos?",
+            "resposta": "Se um arquivo for excluído, ele não estará mais disponível para uso nos módulos onde foi configurado. Certifique-se de que o arquivo não está sendo utilizado antes de excluí-lo."
+        },
+        {
+            "pergunta": "O que é o módulo Pesquisar e para que serve?",
+            "resposta": "O módulo Pesquisar permite realizar buscas específicas de atendimentos realizados no sistema. Ele armazena todas as mensagens trocadas e oferece diversos filtros para localizar atendimentos com base em critérios como data, usuário, conexão, status, tags, contato, filas, protocolo e texto da mensagem."
+        },
+        {
+            "pergunta": "Quem pode acessar o módulo Pesquisar?",
+            "resposta": "O módulo Pesquisar está disponível para usuários com permissão para visualizar os registros de atendimento, geralmente administradores ou supervisores, dependendo das configurações do sistema."
+        },
+        {
+            "pergunta": "Como acessar o módulo Pesquisar?",
+            "resposta": "Para acessar o módulo Pesquisar, vá até o menu principal do sistema e clique na opção 'Pesquisar'."
+        },
+        {
+            "pergunta": "Quais filtros estão disponíveis no módulo Pesquisar?",
+            "resposta": "Os filtros disponíveis incluem: usuário (atendente), conexão (número do WhatsApp utilizado), status do atendimento, tags cadastradas, contato, filas (departamentos), protocolo de atendimento, data e texto da mensagem."
+        },
+        {
+            "pergunta": "Como realizar uma busca no módulo Pesquisar?",
+            "resposta": "Ao acessar o módulo Pesquisar, preencha os filtros desejados, como data inicial e final, tags, ou qualquer outro critério relevante. Clique em 'Buscar Atendimentos' para exibir os resultados correspondentes aos filtros aplicados."
+        },
+        {
+            "pergunta": "O que é exibido nos cartões informativos após uma busca?",
+            "resposta": "Após realizar uma busca, são exibidos cartões informativos acima da lista de resultados. O cartão 'Total de Resultados' mostra o número total de atendimentos encontrados, e o cartão 'Download dos Resultados' permite exportar a lista em formato CSV para visualização no Excel."
+        },
+        {
+            "pergunta": "Quais informações são mostradas na lista de atendimentos filtrados?",
+            "resposta": "A lista de atendimentos filtrados exibe: ID/protocolo do atendimento, nome do contato, nome do atendente, data e hora de criação, início e finalização do atendimento, fila inicial (departamento), transferência (se houver), tags atribuídas e avaliação do atendimento."
+        },
+        {
+            "pergunta": "Como gerar um relatório completo de um atendimento específico?",
+            "resposta": "Na lista de atendimentos filtrados, clique no ícone de folha ao lado do atendimento desejado. Isso gera um relatório detalhado, incluindo informações como o contato, o atendente, a conexão utilizada, a primeira mensagem enviada, início e fim do atendimento, além do histórico completo de mensagens. Esse relatório também pode ser baixado em PDF."
+        },
+        {
+            "pergunta": "Como visualizar um atendimento diretamente no módulo de chats?",
+            "resposta": "Na lista de atendimentos filtrados, clique no ícone de olho ao lado do atendimento desejado. Isso abrirá a conversa no módulo de chats, permitindo visualizar todas as mensagens trocadas durante o atendimento."
+        },
+        {
+            "pergunta": "É possível reabrir um atendimento já finalizado?",
+            "resposta": "Sim, ao visualizar um atendimento fechado no módulo de chats, clique no botão 'Reabrir' no topo da tela. Isso criará um novo protocolo para o contato, permitindo que um novo atendimento seja iniciado."
+        },
+        {
+            "pergunta": "O que acontece se nenhum filtro for aplicado na busca?",
+            "resposta": "Se nenhum filtro específico for aplicado, o sistema exibirá todos os atendimentos realizados dentro do intervalo de datas informado ou o total geral de atendimentos, caso nenhuma data seja especificada."
+        },
+        {
+            "pergunta": "O que é o modelo de fila única no Master Zap?",
+            "resposta": "O modelo de fila única é utilizado quando um cliente entra em contato com a empresa e é direcionado diretamente para o setor de atendimento, sem passar por um menu de opções. É ideal para negócios que não precisam segmentar atendimentos por departamentos."
+        },
+        {
+            "pergunta": "Como configurar o modelo de fila única no Master Zap?",
+            "resposta": "Para configurar o modelo de fila única, crie uma fila chamada 'Atendimento' em 'Filas e Chatbot', defina nome, ordem e cor, configure os horários de atendimento e associe essa fila à conexão WhatsApp em 'Conexões'. Em seguida, edite os usuários na aba 'Equipe' para permitir acesso à fila criada."
+        },
+        {
+            "pergunta": "O que é o modelo de menu interativo no Master Zap?",
+            "resposta": "O modelo de menu interativo permite que o cliente escolha uma das opções apresentadas, como 'financeiro', 'comercial' ou 'vendas', e seja redirecionado para um departamento específico ou siga um fluxo estratégico com automações. Isso minimiza o tempo de atendimento e torna o processo mais ágil."
+        },
+        {
+            "pergunta": "Como criar um menu interativo no Master Zap?",
+            "resposta": "Para criar um menu interativo, acesse 'Filas e Chatbot', crie filas para cada opção do menu (ex.: 'Fazer um orçamento', 'Assistência técnica'), configure tags para identificar as etapas e utilize o Flow Builder para criar o fluxo de automação com mensagens, perguntas e redirecionamentos."
+        },
+        {
+            "pergunta": "Quais são as configurações básicas necessárias no Master Zap?",
+            "resposta": "As configurações básicas incluem habilitar 'Enviar avaliações', definir 'Gerenciamento por fila', ativar 'Ignorar mensagens de grupos', configurar 'Chamada de voz pelo WhatsApp', ajustar 'Tipo chatbot' para texto, habilitar 'Abrir ticket fora do expediente' e configurar opções de operador e logs conforme necessário."
+        },
+        {
+            "pergunta": "Como conectar o WhatsApp ao Master Zap?",
+            "resposta": "Vá em 'Conexões', clique em 'Adicionar WhatsApp', defina um nome, marque como padrão, ative a confirmação de leitura e salve. Abra o WhatsApp Business no celular, acesse 'Dispositivos Conectados', escaneie o QR Code gerado e aguarde a mensagem 'Conexão estabelecida'."
+        },
+        {
+            "pergunta": "Como criar uma resposta rápida no Master Zap?",
+            "resposta": "Acesse 'Respostas Rápidas', clique em 'Adicionar', defina um atalho (ex.: 'redes sociais'), use tags como {{fn}} para personalização, marque como 'global' para disponibilizar a todos os usuários e salve."
+        },
+        {
+            "pergunta": "O que são tags e como usá-las no Master Zap?",
+            "resposta": "Tags são marcadores que ajudam a organizar os atendimentos. Elas podem ser criadas em 'Tags', atribuídas durante o atendimento e usadas para agrupar contatos no Kanban. Para criar uma tag, insira nome, cor, tipo e ative a opção CBAN se desejar organizá-la no quadro visual."
+        },
+        {
+            "pergunta": "Como testar o sistema após configurar uma fila única?",
+            "resposta": "Após configurar a fila única, acesse uma aba anônima, entre com um usuário comum criado e simule um atendimento. Verifique se a mensagem aparece para o usuário e se o fluxo de atendimento está funcionando conforme esperado."
+        },
+        {
+            "pergunta": "Como usar o Flow Builder no Master Zap?",
+            "resposta": "O Flow Builder permite criar fluxos de automação. Para usá-lo, clique em 'Adicionar fluxo', nomeie o fluxo, adicione blocos para mensagens, perguntas e redirecionamentos, conecte os blocos conforme a lógica desejada e finalize o fluxo com uma ação clara."
+        },
+        {
+            "pergunta": "O que é o botão Whisper no Master Zap?",
+            "resposta": "O botão Whisper (ícone de balão azul) permite enviar mensagens internas visíveis apenas para a equipe durante o atendimento. Desativando o Whisper, a mensagem volta a ser visível para o cliente."
+        },
+        {
+            "pergunta": "Como garantir que o cliente receba uma mensagem fora do expediente?",
+            "resposta": "Para garantir que o cliente receba uma mensagem fora do expediente, configure os horários de atendimento na aba 'Horários de Atendimento' da fila e insira uma mensagem automática que será enviada quando o cliente entrar em contato fora do horário estabelecido."
+        },
+        {
+            "pergunta": "Como transferir um atendimento entre setores no Master Zap?",
+            "resposta": "Durante o atendimento, use a opção de transferência para encaminhar o contato para outro setor, usuário específico ou devolvê-lo para a fila de espera. O sistema registra a origem e o destino do atendimento."
+        },
+        {
+            "pergunta": "O que fazer se o cliente não responder durante a automação?",
+            "resposta": "Configure uma regra em 'Conexões' para redirecionar o contato caso ele não responda dentro de um determinado tempo (ex.: 5 minutos). Isso evita que o cliente fique travado no sistema."
+        },
+        {
+            "pergunta": "Como acessar a base de conhecimento e central de ajuda do Master Zap?",
+            "resposta": "A base de conhecimento e central de ajuda estão disponíveis diretamente na plataforma, com vídeos explicativos e tutoriais que auxiliam na configuração e uso das funcionalidades."
+        },
+        {
+            "pergunta": "O que é o modelo de fila única no Master Zap?",
+            "resposta": "O modelo de fila única é utilizado quando um cliente entra em contato com a empresa e é direcionado diretamente para o setor de atendimento, sem passar por um menu de opções. É ideal para negócios que não precisam segmentar atendimentos por departamentos."
+        },
+        {
+            "pergunta": "Como configurar o modelo de fila única no Master Zap?",
+            "resposta": "Para configurar o modelo de fila única, crie uma fila chamada 'Atendimento' em 'Filas e Chatbot', defina nome, ordem e cor, configure os horários de atendimento e associe essa fila à conexão WhatsApp em 'Conexões'. Em seguida, edite os usuários na aba 'Equipe' para permitir acesso à fila criada."
+        },
+        {
+            "pergunta": "O que é o modelo de menu interativo no Master Zap?",
+            "resposta": "O modelo de menu interativo permite que o cliente escolha uma das opções apresentadas, como 'financeiro', 'comercial' ou 'vendas', e seja redirecionado para um departamento específico ou siga um fluxo estratégico com automações. Isso minimiza o tempo de atendimento e torna o processo mais ágil."
+        },
+        {
+            "pergunta": "Como criar um menu interativo no Master Zap?",
+            "resposta": "Para criar um menu interativo, acesse 'Filas e Chatbot', crie filas para cada opção do menu (ex.: 'Fazer um orçamento', 'Assistência técnica'), configure tags para identificar as etapas e utilize o Flow Builder para criar o fluxo de automação com mensagens, perguntas e redirecionamentos."
+        },
+        {
+            "pergunta": "Quais são as configurações básicas necessárias no Master Zap?",
+            "resposta": "As configurações básicas incluem habilitar 'Enviar avaliações', definir 'Gerenciamento por fila', ativar 'Ignorar mensagens de grupos', configurar 'Chamada de voz pelo WhatsApp', ajustar 'Tipo chatbot' para texto, habilitar 'Abrir ticket fora do expediente' e configurar opções de operador e logs conforme necessário."
+        },
+        {
+            "pergunta": "Como conectar o WhatsApp ao Master Zap?",
+            "resposta": "Vá em 'Conexões', clique em 'Adicionar WhatsApp', defina um nome, marque como padrão, ative a confirmação de leitura e salve. Abra o WhatsApp Business no celular, acesse 'Dispositivos Conectados', escaneie o QR Code gerado e aguarde a mensagem 'Conexão estabelecida'."
+        },
+        {
+            "pergunta": "Como criar uma resposta rápida no Master Zap?",
+            "resposta": "Acesse 'Respostas Rápidas', clique em 'Adicionar', defina um atalho (ex.: 'redes sociais'), use tags como {{fn}} para personalização, marque como 'global' para disponibilizar a todos os usuários e salve."
+        },
+        {
+            "pergunta": "O que são tags e como usá-las no Master Zap?",
+            "resposta": "Tags são marcadores que ajudam a organizar os atendimentos. Elas podem ser criadas em 'Tags', atribuídas durante o atendimento e usadas para agrupar contatos no Kanban. Para criar uma tag, insira nome, cor, tipo e ative a opção CBAN se desejar organizá-la no quadro visual."
+        },
+        {
+            "pergunta": "Como testar o sistema após configurar uma fila única?",
+            "resposta": "Após configurar a fila única, acesse uma aba anônima, entre com um usuário comum criado e simule um atendimento. Verifique se a mensagem aparece para o usuário e se o fluxo de atendimento está funcionando conforme esperado."
+        },
+        {
+            "pergunta": "Como usar o Flow Builder no Master Zap?",
+            "resposta": "O Flow Builder permite criar fluxos de automação. Para usá-lo, clique em 'Adicionar fluxo', nomeie o fluxo, adicione blocos para mensagens, perguntas e redirecionamentos, conecte os blocos conforme a lógica desejada e finalize o fluxo com uma ação clara."
+        },
+        {
+            "pergunta": "O que é o botão Whisper no Master Zap?",
+            "resposta": "O botão Whisper (ícone de balão azul) permite enviar mensagens internas visíveis apenas para a equipe durante o atendimento. Desativando o Whisper, a mensagem volta a ser visível para o cliente."
+        },
+        {
+            "pergunta": "Como garantir que o cliente receba uma mensagem fora do expediente?",
+            "resposta": "Para garantir que o cliente receba uma mensagem fora do expediente, configure os horários de atendimento na aba 'Horários de Atendimento' da fila e insira uma mensagem automática que será enviada quando o cliente entrar em contato fora do horário estabelecido."
+        },
+        {
+            "pergunta": "Como transferir um atendimento entre setores no Master Zap?",
+            "resposta": "Durante o atendimento, use a opção de transferência para encaminhar o contato para outro setor, usuário específico ou devolvê-lo para a fila de espera. O sistema registra a origem e o destino do atendimento."
+        },
+        {
+            "pergunta": "O que fazer se o cliente não responder durante a automação?",
+            "resposta": "Configure uma regra em 'Conexões' para redirecionar o contato caso ele não responda dentro de um determinado tempo (ex.: 5 minutos). Isso evita que o cliente fique travado no sistema."
+        },
+        {
+            "pergunta": "Como acessar a base de conhecimento e central de ajuda do Master Zap?",
+            "resposta": "A base de conhecimento e central de ajuda estão disponíveis diretamente na plataforma, com vídeos explicativos e tutoriais que auxiliam na configuração e uso das funcionalidades."
+        },
+        {
+            "pergunta": "O que são respostas rápidas e para que servem?",
+            "resposta": "Respostas rápidas são mensagens pré-definidas que podem ser utilizadas durante o atendimento para agilizar a comunicação. Elas são úteis para enviar informações recorrentes, como dados bancários, endereços ou detalhes de produtos, sem a necessidade de digitar manualmente a cada vez."
+        },
+        {
+            "pergunta": "Como usar uma resposta rápida durante um atendimento?",
+            "resposta": "Para usar uma resposta rápida, basta digitar '/' seguido do nome do atalho da resposta na caixa de texto. A mensagem será automaticamente inserida no campo de envio, pronta para ser enviada ao cliente."
+        },
+        {
+            "pergunta": "Quem pode criar e gerenciar respostas rápidas?",
+            "resposta": "Todos os usuários podem criar suas próprias respostas rápidas, mas apenas administradores e supervisores podem editar ou excluir todas as respostas cadastradas, além de marcá-las como globais para uso por toda a equipe."
+        },
+        {
+            "pergunta": "Como adicionar uma nova resposta rápida?",
+            "resposta": "Acesse o módulo 'Respostas Rápidas' no menu principal, clique em 'Adicionar', preencha o campo 'Atalho' com o nome que será usado para chamar a resposta e insira o texto da mensagem. É possível incluir variáveis dinâmicas, anexos e marcar a opção 'Global' se desejar disponibilizá-la para todos os usuários."
+        },
+        {
+            "pergunta": "O que são variáveis nas respostas rápidas?",
+            "resposta": "Variáveis são elementos dinâmicos que puxam informações específicas, como o nome do contato, número do protocolo, saudação conforme o horário do dia ou data/hora. Elas personalizam as mensagens automaticamente no momento do envio."
+        },
+        {
+            "pergunta": "Como tornar uma resposta rápida acessível para toda a equipe?",
+            "resposta": "Ao criar ou editar uma resposta rápida, marque a opção 'Global'. Isso permitirá que todos os usuários da plataforma tenham acesso àquela resposta durante seus atendimentos."
+        },
+        {
+            "pergunta": "Posso incluir arquivos nas respostas rápidas?",
+            "resposta": "Sim, é possível incluir arquivos, como imagens ou documentos, nas respostas rápidas. Use o botão 'Anexar' para carregar o arquivo desejado e, se necessário, adicione uma legenda para acompanhar o anexo."
+        },
+        {
+            "pergunta": "Como excluir ou editar uma resposta rápida?",
+            "resposta": "No módulo 'Respostas Rápidas', localize a resposta desejada, clique no ícone de lápis para editar ou no ícone de lixeira para excluí-la. Administradores e supervisores têm permissão para realizar essas ações em todas as respostas, enquanto usuários padrão só podem editar ou excluir as respostas que criaram."
+        },
+        {
+            "pergunta": "Por que é recomendável que os administradores criem as respostas rápidas?",
+            "resposta": "Administradores têm controle total sobre as respostas rápidas, podendo editá-las, excluí-las e marcá-las como globais. Isso garante consistência nas mensagens enviadas pela equipe e facilita a padronização das comunicações."
+        },
+        {
+            "pergunta": "Como buscar rapidamente uma resposta rápida durante um atendimento?",
+            "resposta": "Recomenda-se iniciar o nome do atalho com um ponto final (ex.: .protocolo). Ao digitar '/' seguido de '.', a lista completa de respostas aparecerá, facilitando a busca pelo comando correto."
+        },
+        {
+            "pergunta": "O que são tags e como elas ajudam na gestão de atendimentos?",
+            "resposta": "Tags são etiquetas utilizadas para classificar, organizar e rastrear clientes ou atendimentos. Elas permitem identificar o tipo de cliente (ex.: autônomo, varejo) ou atribuir características específicas (ex.: urgente, prioritário). Além disso, as tags podem ser usadas em campanhas segmentadas e facilitam a busca e organização em diversos módulos do sistema."
+        },
+        {
+            "pergunta": "Como adicionar uma tag a um atendimento?",
+            "resposta": "Ao abrir o chat de um contato no módulo de chats, localize o campo 'Tags' abaixo do nome do cliente. Clique no campo para visualizar a lista de tags cadastradas e selecione a tag desejada. As tags adicionadas ficarão visíveis abaixo do nome do contato e nas abas de 'Atendimento' e 'Aguardando'."
+        },
+        {
+            "pergunta": "Quem pode criar, editar ou excluir tags no sistema?",
+            "resposta": "Qualquer usuário pode criar tags, mas apenas administradores têm permissão para editar ou excluir tags já cadastradas. Por isso, é recomendável que o administrador seja responsável pela criação das tags para garantir consistência e controle."
+        },
+        {
+            "pergunta": "Como cadastrar uma nova tag?",
+            "resposta": "Vá até o menu 'Tags', clique em 'Nova Tag' e preencha os campos obrigatórios: Nome, Cor e, se necessário, habilite a opção 'Kanban' para que a tag apareça nos quadros do módulo Kanban. Após preencher os dados, clique em 'Adicionar' para salvar a tag."
+        },
+        {
+            "pergunta": "O que é o módulo Kanban e como ele funciona?",
+            "resposta": "O módulo Kanban é uma ferramenta visual que organiza os atendimentos por tags e filas. Ele só funciona com tags que têm a opção 'Kanban' habilitada durante o cadastro. O Kanban permite acompanhar o andamento dos processos e gerenciar melhor o tempo e os recursos."
+        },
+        {
+            "pergunta": "Quais são os tipos de visualização disponíveis no módulo Kanban?",
+            "resposta": "Os três tipos de visualização são: Kanban Padrão (mostra atendimentos em aberto ou aguardando, separados por tags, do usuário logado), Kanban Visão Geral (exibe todos os atendimentos — abertos e fechados — separados por tags) e Kanban Filas (organiza os atendimentos por filas/departamentos)."
+        },
+        {
+            "pergunta": "Quem pode acessar os diferentes menus do Kanban?",
+            "resposta": "Usuários padrão podem visualizar apenas o menu 'Kanban Padrão', enquanto administradores e supervisores têm acesso a todos os três menus do Kanban (Padrão, Visão Geral e Filas)."
+        },
+        {
+            "pergunta": "Como as tags podem ser usadas em campanhas?",
+            "resposta": "As tags permitem segmentar campanhas para públicos específicos. Por exemplo, ao usar uma tag como 'rota norte', você pode enviar uma campanha exclusiva para clientes dessa região, informando sobre promoções ou entregas gratuitas."
+        },
+        {
+            "pergunta": "É possível remover ou alterar uma tag após adicioná-la?",
+            "resposta": "Sim, as tags podem ser removidas ou substituídas conforme a necessidade. Basta clicar no campo 'Tags' no chat do cliente, remover a tag indesejada e adicionar outra, se necessário."
+        },
+        {
+            "pergunta": "Por que é importante habilitar a opção 'Kanban' ao criar uma tag?",
+            "resposta": "Habilitar a opção 'Kanban' garante que a tag apareça nos quadros do módulo Kanban, permitindo uma visualização organizada e clara dos atendimentos associados a essa tag. Sem essa opção ativada, a tag não será exibida no Kanban."
+        },
+        {
+            "pergunta": "O que é o módulo de Contatos e para que serve?",
+            "resposta": "O módulo de Contatos funciona como uma agenda telefônica centralizada no sistema, onde todas as informações de contato ficam armazenadas. Ele permite gerenciar contatos de forma organizada, incluindo dados como nome, número do WhatsApp, e-mail e informações adicionais."
+        },
+        {
+            "pergunta": "Como acessar o módulo de Contatos?",
+            "resposta": "Para acessar o módulo de Contatos, clique na opção correspondente no menu principal do sistema. A lista de contatos cadastrados será exibida, junto com o total de registros e opções para busca, importação, exportação e adição de novos contatos."
+        },
+        {
+            "pergunta": "Quais são os campos obrigatórios ao cadastrar um contato?",
+            "resposta": "Os campos obrigatórios ao cadastrar um contato são: Nome e Número do WhatsApp (com código do país, DDD e número sem o nono dígito). O e-mail e informações adicionais são opcionais."
+        },
+        {
+            "pergunta": "Como formatar corretamente o número do WhatsApp ao cadastrar um contato?",
+            "resposta": "O número do WhatsApp deve seguir o formato internacional, com o código do país (55 para Brasil), seguido pelo DDD e o número de telefone sem o nono dígito. Não use espaços, barras ou caracteres especiais."
+        },
+        {
+            "pergunta": "Por que o número do WhatsApp não pode ser alterado após o cadastro?",
+            "resposta": "O número do WhatsApp funciona como um ID único de identificação no sistema. Por isso, ele não pode ser alterado. Se o número estiver incorreto, será necessário excluir o contato e cadastrá-lo novamente."
+        },
+        {
+            "pergunta": "Como buscar um contato específico no módulo de Contatos?",
+            "resposta": "Utilize a caixa de pesquisa localizada acima da lista de contatos. Digite o nome ou número do contato, e o sistema filtrará os resultados automaticamente."
+        },
+        {
+            "pergunta": "Como importar contatos para o sistema?",
+            "resposta": "Você pode importar contatos usando duas opções: 'Agenda do telefone', que sincroniza os contatos do WhatsApp conectado, ou 'Importar arquivo', que permite carregar uma lista de contatos a partir de um arquivo Excel. Para a segunda opção, solicite o modelo de arquivo ao suporte técnico."
+        },
+        {
+            "pergunta": "Como exportar contatos do sistema?",
+            "resposta": "Clique em 'Exportar' no módulo de Contatos. Você pode aplicar filtros por tags ou setores antes de exportar. O arquivo será gerado em formato .csv e pode ser visualizado no Excel."
+        },
+        {
+            "pergunta": "O que é a opção 'Chave para desabilitar chatbot' ao cadastrar um contato?",
+            "resposta": "Essa opção impede que o contato passe pelo chatbot, direcionando-o diretamente para a fila de espera por atendimento. Ele não receberá mensagens de saudação ou seleção de departamento."
+        },
+        {
+            "pergunta": "Como adicionar informações adicionais a um contato?",
+            "resposta": "Ao cadastrar ou editar um contato, utilize o campo 'Informações adicionais'. Clique no botão correspondente para adicionar pares de nome e valor, como 'Cargo: Gerente' ou 'Empresa: XYZ'. É possível adicionar quantos campos forem necessários."
+        },
+        {
+            "pergunta": "Como iniciar um atendimento diretamente de um contato?",
+            "resposta": "Clique no ícone do WhatsApp ao lado do contato na lista. Uma janela será aberta para escolher o departamento e a conexão. Após salvar, o ticket de atendimento será criado no módulo de chats."
+        },
+        {
+            "pergunta": "Quem pode excluir um contato do sistema?",
+            "resposta": "Apenas usuários administradores têm permissão para excluir contatos do sistema. A exclusão afeta apenas o cadastro no sistema, sem alterar o número no WhatsApp conectado."
+        },
+        {
+            "pergunta": "Como editar os dados de um contato?",
+            "resposta": "Clique no ícone do lápis ao lado do contato na lista. Uma janela de edição será aberta, permitindo alterar os campos de nome, e-mail, informações adicionais ou desabilitar o chatbot para esse contato."
+        },
+        {
+            "pergunta": "É possível visualizar o status do número de um contato?",
+            "resposta": "Sim, abaixo da lista de contatos, há informações sobre o status do número para o chat, indicando se ele é válido para o WhatsApp. Essa informação ajuda a identificar números que podem precisar de correção ou atualização."
+        },
+        {
+            "pergunta": "O que é o módulo Configurações e para que serve?",
+            "resposta": "O módulo Configurações permite personalizar e ajustar todas as funções e comportamentos da plataforma. Aqui são definidas permissões, liberações de recursos e configurações específicas para atender às necessidades de cada negócio."
+        },
+        {
+            "pergunta": "Como acessar o módulo Configurações?",
+            "resposta": "Para acessar o módulo Configurações, vá até o menu principal do sistema e selecione a opção 'Configurações'. Uma janela com todas as opções de configuração será carregada."
+        },
+        {
+            "pergunta": "Quais são as principais opções disponíveis no módulo Configurações?",
+            "resposta": "As principais opções incluem: enviar avaliações, gerenciamento de expediente, ignorar mensagens de grupos, aceitar chamadas, tipo de chatbot, abrir tickets fora do expediente, mensagem de saudação do operador, transferências, despedidas, assinaturas, visualização de históricos, som de notificação, modo de randomização de atendimento, entre outras."
+        },
+        {
+            "pergunta": "Como configurar horários de expediente no sistema?",
+            "resposta": "Os horários de expediente devem ser configurados nas filas de atendimento no módulo 'Filas e Chatbot'. Em 'Configurações', habilite a opção 'Gerenciamento de expediente' para que o sistema respeite os horários estabelecidos."
+        },
+        {
+            "pergunta": "É possível desativar mensagens de grupos no sistema?",
+            "resposta": "Sim, na aba 'Ignorar mensagens de grupos', você pode ativar ou desativar essa funcionalidade, conforme necessário."
+        },
+        {
+            "pergunta": "Como configurar o tipo de chatbot?",
+            "resposta": "No campo 'Tipo de chatbot', escolha entre 'Texto' ou 'Botões no WhatsApp' para definir como o chatbot interagirá com os contatos."
+        },
+        {
+            "pergunta": "O que acontece se 'Abrir tickets fora do expediente' estiver habilitado?",
+            "resposta": "Se habilitado, os atendimentos recebidos fora do horário de expediente serão abertos em forma de ticket para serem respondidos posteriormente pelos usuários do sistema."
+        },
+        {
+            "pergunta": "Como personalizar mensagens de saudação, transferência e despedida?",
+            "resposta": "Na aba correspondente ('Mensagem de saudação', 'Mensagem de transferência', 'Mensagem de despedida'), habilite a opção e edite o texto conforme necessário. É possível usar variáveis dinâmicas do sistema nessas mensagens."
+        },
+        {
+            "pergunta": "O que é a opção 'Informar posição na fila'?",
+            "resposta": "Essa opção envia automaticamente uma mensagem ao contato informando sua posição atual na fila de atendimento. Você pode editar a mensagem e usar variáveis do sistema para personalizá-la."
+        },
+        {
+            "pergunta": "Como permitir que os operadores vejam históricos de atendimento?",
+            "resposta": "Habilite a opção 'Operador visualiza históricos' para que os usuários possam ver todas as mensagens enviadas pelos contatos e atendentes durante os atendimentos."
+        },
+        {
+            "pergunta": "O que significa 'Notificação global'?",
+            "resposta": "A 'Notificação global' permite que todos os operadores vejam os atendimentos de outros usuários. Se desativada, cada operador só verá seus próprios atendimentos."
+        },
+        {
+            "pergunta": "Como alterar o idioma das mensagens do bot?",
+            "resposta": "Na opção 'Idioma do bot', selecione o idioma desejado para as mensagens automáticas enviadas pelo chatbot."
+        },
+        {
+            "pergunta": "O que é a carteira de clientes e como ativá-la?",
+            "resposta": "A carteira de clientes é usada para atribuir contatos específicos a vendedores ou operadores. Para ativá-la, habilite a opção 'Carteira de clientes' no módulo Configurações."
+        },
+        {
+            "pergunta": "Como configurar o som de notificação?",
+            "resposta": "Em 'Som de notificação', defina sons diferentes para chats, grupos e transferências, conforme preferência da equipe."
+        },
+        {
+            "pergunta": "O que fazer se algo não estiver funcionando corretamente no sistema?",
+            "resposta": "Verifique as configurações no módulo 'Configurações', pois a plataforma precisa ser ajustada corretamente de acordo com o propósito e as necessidades do negócio. Caso persistam dúvidas, consulte o suporte técnico."
+        },
+        {
+            "pergunta": "O que é o módulo Conexões e para que serve?",
+            "resposta": "O módulo Conexões é usado para conectar números do WhatsApp à plataforma, permitindo a realização de atendimentos. Ele também possibilita configurar mensagens automáticas, filas, e outras funcionalidades relacionadas ao funcionamento das conexões."
+        },
+        {
+            "pergunta": "Como acessar o módulo Conexões?",
+            "resposta": "Para acessar o módulo Conexões, vá até o menu principal da plataforma e clique em 'Conexões'. Lá, você verá uma lista com todas as conexões cadastradas, seus status e opções de ação."
+        },
+        {
+            "pergunta": "Quem pode gerenciar as conexões na plataforma?",
+            "resposta": "Apenas administradores têm permissão para gerenciar as conexões, incluindo criar, editar ou excluir conexões existentes."
+        },
+        {
+            "pergunta": "Como conectar um número do WhatsApp à plataforma?",
+            "resposta": "Clique em 'WhatsApp' no módulo Conexões, preencha os campos necessários (como Nome), escaneie o QR Code gerado pelo WhatsApp Web no celular e aguarde a mensagem 'Conexão estabelecida'."
+        },
+        {
+            "pergunta": "O que fazer se o ícone de interrogação vermelho aparecer ao lado de uma conexão?",
+            "resposta": "O ícone de interrogação vermelho indica que a conexão está instável ou desconectada. Para resolver, gere um novo QR Code, escaneie-o novamente no aplicativo WhatsApp e reestabeleça a conexão."
+        },
+        {
+            "pergunta": "Como definir uma conexão como padrão?",
+            "resposta": "Ao editar ou criar uma conexão, marque a opção 'Chave padrão' para definir essa conexão como a principal usada pela plataforma quando mais de uma estiver disponível."
+        },
+        {
+            "pergunta": "O que é o campo 'Arquivo de capa' nas configurações de conexão?",
+            "resposta": "O campo 'Arquivo de capa' permite anexar um arquivo que será enviado automaticamente no início do atendimento, antes da mensagem de saudação. O arquivo deve ser previamente adicionado no Gerenciador de Arquivos."
+        },
+        {
+            "pergunta": "Como configurar mensagens automáticas em uma conexão?",
+            "resposta": "Em 'Conexões', edite a conexão desejada e preencha os campos: Mensagem de saudação (início do atendimento), Mensagem de conclusão (final) e Mensagem de fora do expediente (caso o contato entre em contato fora do horário). Use variáveis do sistema, se necessário."
+        },
+        {
+            "pergunta": "O que acontece se o cliente iniciar um atendimento fora do horário de funcionamento?",
+            "resposta": "Se o horário de expediente estiver configurado e habilitado, o cliente receberá automaticamente a 'Mensagem de fora do expediente'. Caso contrário, ele não receberá nenhuma mensagem automática."
+        },
+        {
+            "pergunta": "Como fechar todos os tickets de uma conexão?",
+            "resposta": "Na aba 'Ações' da conexão, use a opção 'Fechar tickets' para encerrar todos os atendimentos pendentes ou todos os tickets associados àquela conexão."
+        },
+        {
+            "pergunta": "Como bloquear números específicos em uma conexão?",
+            "resposta": "No campo 'Ignorar números', insira os números que deseja bloquear, separando-os por vírgulas. Esses números não aparecerão nos módulos de chat nem serão atendidos."
+        },
+        {
+            "pergunta": "O que é a opção 'Inatividade' nas configurações de conexão?",
+            "resposta": "A opção 'Inatividade' permite encerrar automaticamente atendimentos que permaneçam inativos por um período definido. Uma mensagem de encerramento pode ser configurada para informar o cliente sobre o motivo."
+        },
+        {
+            "pergunta": "Como configurar as filas de uma conexão?",
+            "resposta": "Ao criar ou editar uma conexão, defina quais filas/departamentos estarão disponíveis para atendimento. Essas filas aparecerão como opções no chatbot após a mensagem de saudação."
+        },
+        {
+            "pergunta": "É possível reconectar um número desconectado sem perder os dados?",
+            "resposta": "Sim, basta gerar um novo QR Code e escanear novamente no WhatsApp. Os dados da conexão, como mensagens e atendimentos, permanecem salvos no sistema."
+        },
+        {
+            "pergunta": "Como excluir uma conexão?",
+            "resposta": "Clique no ícone de lixeira ao lado da conexão que deseja excluir. Tenha cuidado, pois isso removerá todos os dados associados àquela conexão, incluindo atendimentos em andamento."
+        },
+        {
+            "pergunta": "O que fazer se o ícone de interrogação vermelho aparecer no módulo Conexões?",
+            "resposta": "O ícone de interrogação vermelho indica que uma conexão está instável ou desconectada. Para resolver, gere um novo QR Code no sistema, escaneie-o no aplicativo WhatsApp no celular e reestabeleça a conexão."
+        },
+        {
+            "pergunta": "Por que o WhatsApp pode se desconectar da plataforma?",
+            "resposta": "A desconexão pode ocorrer devido a atualizações no WhatsApp ou por uma rotina automática do algoritmo que exige reconexão periódica. Isso não é necessariamente um problema, mas requer atenção para restabelecer a conexão."
+        },
+        {
+            "pergunta": "Como verificar o status de uma conexão no módulo Conexões?",
+            "resposta": "No campo 'Status' do módulo Conexões, um ícone verde indica que a conexão está ativa. Um ícone com forma quadrada ou sinal de exclamação vermelho significa que a conexão está inativa e precisa ser reconectada."
+        },
+        {
+            "pergunta": "Como reconectar o WhatsApp ao sistema?",
+            "resposta": "Para reconectar, acesse o módulo Conexões, clique em 'QR Code' para gerar um novo código, abra o WhatsApp no celular, vá em 'Dispositivos Conectados', clique em 'Conectar Dispositivo' e escaneie o código gerado pelo sistema."
+        },
+        {
+            "pergunta": "O que fazer após escanear o QR Code para garantir a conexão?",
+            "resposta": "Após escanear o QR Code, aguarde a mensagem de 'Conexão estabelecida' no sistema. Recomenda-se recarregar a página para validar a conexão e verificar o status novamente."
+        },
+        {
+            "pergunta": "Como editar as filas associadas a uma conexão?",
+            "resposta": "Clique em 'Editar Conexão' no módulo Conexões, vá até a aba 'Filas' e selecione as filas que essa conexão terá acesso para realizar os atendimentos. Salve as alterações ao final."
+        },
+        {
+            "pergunta": "É possível desconectar ou excluir uma sessão manualmente?",
+            "resposta": "Sim, na opção 'Sessão' da conexão, você pode escolher entre 'Desconectar' ou 'Excluir Sessão'. Após isso, será necessário escanear novamente o QR Code para reconectar ao sistema."
+        },
+        {
+            "pergunta": "Por que nomear o dispositivo ao conectar o WhatsApp?",
+            "resposta": "Ao conectar o WhatsApp, o sistema solicita um nome para o dispositivo. Isso ajuda a organizar e identificar as conexões ativas, especialmente quando há várias conexões configuradas."
+        },
+        {
+            "pergunta": "O que é o chat interno e para que serve?",
+            "resposta": "O chat interno é uma ferramenta de comunicação interna dentro da plataforma, que substitui a necessidade de usar grupos de WhatsApp para conversas entre equipes. Ele centraliza a comunicação em um só lugar, permitindo criar chats específicos para setores ou grupos de usuários."
+        },
+        {
+            "pergunta": "Como acessar o módulo de chat interno?",
+            "resposta": "Para acessar o chat interno, basta clicar na opção 'Chat Interno' no menu principal do sistema."
+        },
+        {
+            "pergunta": "Como criar um novo chat interno?",
+            "resposta": "Dentro do módulo 'Chat Interno', clique em 'Nova Conversa'. Insira um título para o chat e, na guia 'Filtro de Usuários', selecione os participantes que farão parte do grupo. Após configurar, o chat estará criado e pronto para uso."
+        },
+        {
+            "pergunta": "Quem pode criar chats internos?",
+            "resposta": "Por padrão, apenas administradores podem criar chats internos. No entanto, há uma configuração nas 'Configurações' que permite liberar essa função para usuários comuns, caso desejado."
+        },
+        {
+            "pergunta": "É possível enviar arquivos no chat interno?",
+            "resposta": "Sim, no chat interno é possível enviar mensagens e anexar arquivos. Os participantes recebem notificações sempre que uma nova mensagem é enviada."
+        },
+        {
+            "pergunta": "Como excluir um chat interno?",
+            "resposta": "Para excluir um chat interno, localize o grupo que deseja apagar, clique no ícone de lixeira ao lado dele e confirme a exclusão. Apenas o criador do chat (administrador ou usuário comum, dependendo da configuração) pode realizar essa ação."
+        },
+        {
+            "pergunta": "Por que é recomendável restringir a criação de chats internos aos administradores?",
+            "resposta": "Permitir que todos os usuários criem chats internos pode gerar desorganização, pois muitos grupos podem ser criados sem controle, dificultando a gestão das conversas internas. Por isso, recomenda-se manter essa função restrita aos administradores."
+        },
+        {
+            "pergunta": "Os usuários recebem notificações quando uma mensagem é enviada no chat interno?",
+            "resposta": "Sim, toda vez que uma mensagem é enviada no chat interno, os participantes recebem uma notificação no ícone correspondente na barra superior do sistema."
+        },
+        {
+            "pergunta": "O que é o chat interno e para que serve?",
+            "resposta": "O chat interno é uma ferramenta de comunicação interna dentro da plataforma, que substitui a necessidade de usar grupos de WhatsApp para conversas entre equipes. Ele centraliza a comunicação em um só lugar, permitindo criar chats específicos para setores ou grupos de usuários."
+        },
+        {
+            "pergunta": "Como acessar o módulo de chat interno?",
+            "resposta": "Para acessar o chat interno, basta clicar na opção 'Chat Interno' no menu principal do sistema."
+        },
+        {
+            "pergunta": "Como criar um novo chat interno?",
+            "resposta": "Dentro do módulo 'Chat Interno', clique em 'Nova Conversa'. Insira um título para o chat e, na guia 'Filtro de Usuários', selecione os participantes que farão parte do grupo. Após configurar, o chat estará criado e pronto para uso."
+        },
+        {
+            "pergunta": "Quem pode criar chats internos?",
+            "resposta": "Por padrão, apenas administradores podem criar chats internos. No entanto, há uma configuração nas 'Configurações' que permite liberar essa função para usuários comuns, caso desejado."
+        },
+        {
+            "pergunta": "É possível enviar arquivos no chat interno?",
+            "resposta": "Sim, no chat interno é possível enviar mensagens e anexar arquivos. Os participantes recebem notificações sempre que uma nova mensagem é enviada."
+        },
+        {
+            "pergunta": "Como excluir um chat interno?",
+            "resposta": "Para excluir um chat interno, localize o grupo que deseja apagar, clique no ícone de lixeira ao lado dele e confirme a exclusão. Apenas o criador do chat (administrador ou usuário comum, dependendo da configuração) pode realizar essa ação."
+        },
+        {
+            "pergunta": "Por que é recomendável restringir a criação de chats internos aos administradores?",
+            "resposta": "Permitir que todos os usuários criem chats internos pode gerar desorganização, pois muitos grupos podem ser criados sem controle, dificultando a gestão das conversas internas. Por isso, recomenda-se manter essa função restrita aos administradores."
+        },
+        {
+            "pergunta": "Os usuários recebem notificações quando uma mensagem é enviada no chat interno?",
+            "resposta": "Sim, toda vez que uma mensagem é enviada no chat interno, os participantes recebem uma notificação no ícone correspondente na barra superior do sistema."
+        },
+        {
+            "pergunta": "O que é o módulo de Chat Cliente e para que serve?",
+            "resposta": "O módulo de Chat Cliente é a área principal onde ocorrem os atendimentos dentro da plataforma. É nele que os usuários respondem mensagens, recebem novos contatos e realizam todas as interações com os clientes. Ele permite gerenciar conversas em andamento, atender novos contatos, visualizar tickets concluídos e filtrar atendimentos por diversos critérios, como filas, tags e status."
+        },
+        {
+            "pergunta": "Como acessar o módulo de Chat Cliente?",
+            "resposta": "Para usuários comuns, o módulo de Chat já vem aberto automaticamente ao acessar a plataforma. Para administradores e supervisores, é necessário clicar no menu 'Chat' para acessá-lo."
+        },
+        {
+            "pergunta": "Quais são os elementos principais da barra de menu superior no módulo de Chat?",
+            "resposta": "Na barra superior, encontram-se: saudação do sistema com nome do usuário, ícone para expandir/minimizar o menu lateral, opções de idioma (português do Brasil, Portugal e espanhol), tema claro ou escuro, controle de volume das notificações, botão para recarregar a página, ícones de notificações (atendimentos pendentes, atualizações internas e chat interno) e botão de perfil do usuário para encerrar sessão."
+        },
+        {
+            "pergunta": "Como iniciar um novo atendimento manualmente?",
+            "resposta": "Clique no botão 'Novo' na barra lateral do módulo de Chat. Uma janela será aberta para buscar o contato desejado, selecionar a fila (departamento) e a conexão. Após salvar, o atendimento será direcionado para sua fila de atendimento."
+        },
+        {
+            "pergunta": "O que significa a chave 'Todos' no módulo de Chat?",
+            "resposta": "A chave 'Todos' está disponível apenas para administradores e supervisores. Quando ativada, permite visualizar todos os atendimentos de todos os usuários. Quando desativada, exibe apenas os atendimentos atribuídos ao próprio usuário."
+        },
+        {
+            "pergunta": "Como usar o filtro de filas no módulo de Chat?",
+            "resposta": "O filtro de filas permite escolher qual fila específica você deseja visualizar. Isso é útil quando o usuário está designado para várias filas e quer focar em determinada área de atendimento."
+        },
+        {
+            "pergunta": "O que acontece ao aceitar um atendimento na fila de espera?",
+            "resposta": "Ao aceitar um atendimento, ele sai da fila de 'Aguardando' e é movido para a aba 'Atendendo', tornando-se visível apenas para o atendente que o aceitou. Uma caixa de texto preta aparece ao lado do contato indicando o nome do atendente responsável."
+        },
+        {
+            "pergunta": "Como visualizar uma prévia da conversa sem abrir o atendimento?",
+            "resposta": "Clique no ícone de olho azul ao lado do nome do contato na fila de espera. Essa funcionalidade está disponível somente para administradores e supervisores, mas pode ser habilitada nas configurações para usuários comuns."
+        },
+        {
+            "pergunta": "Quais são as opções disponíveis ao clicar no nome do contato durante um atendimento?",
+            "resposta": "Ao clicar no nome do contato, uma janela será aberta permitindo editar informações como nome, número de telefone e adicionar observações relevantes. Essas alterações afetam apenas o sistema, sem modificar dados no WhatsApp conectado."
+        },
+        {
+            "pergunta": "Como transferir um atendimento para outro usuário ou departamento?",
+            "resposta": "Clique no ícone 'Transferir ticket', selecione o usuário ou departamento para quem deseja transferir o atendimento e confirme a ação. O histórico do atendimento será enviado junto, exceto se essa opção estiver desabilitada nas configurações."
+        },
+        {
+            "pergunta": "É possível agendar mensagens diretamente pelo módulo de Chat?",
+            "resposta": "Sim, utilizando a opção 'Agendamentos'. Ao clicar nesse ícone, você pode programar mensagens para serem enviadas ao contato em um horário específico."
+        },
+        {
+            "pergunta": "Como adicionar tags a um atendimento?",
+            "resposta": "No campo 'Tags' abaixo do nome do contato, clique para selecionar ou criar uma tag. As tags facilitam a organização e identificação de contatos e atendimentos dentro do sistema."
+        },
+        {
+            "pergunta": "Como resolver um atendimento?",
+            "resposta": "Clique no ícone 'Resolver' e escolha entre resolver sem mensagem de encerramento, resolver com mensagem de encerramento ou resolver e enviar avaliação (se configurado). O atendimento será finalizado e salvo no histórico do sistema."
+        },
+        {
+            "pergunta": "O que fazer se um contato enviar um áudio indesejado?",
+            "resposta": "Se a opção 'Permitir áudio' estiver desativada nas configurações, uma mensagem será enviada automaticamente ao contato informando que áudios não são permitidos neste chat. Os áudios ainda serão salvos no sistema para consultas futuras."
+        },
+        {
+            "pergunta": "O que é o módulo de Campanhas e para que serve?",
+            "resposta": "O módulo de Campanhas permite realizar disparos em massa para seus clientes. Diferente das listas de transmissão, nas campanhas o contato receberá a mensagem mesmo sem ter seu número salvo na agenda. É possível utilizar tags para fazer disparos segmentados e específicos diretamente da plataforma."
+        },
+        {
+            "pergunta": "Quem pode acessar e configurar as campanhas no sistema?",
+            "resposta": "Essa funcionalidade está disponível apenas para administradores."
+        },
+        {
+            "pergunta": "Como evitar banimentos no WhatsApp ao usar o módulo de Campanhas?",
+            "resposta": "É importante seguir as regras do WhatsApp para evitar banimentos. O uso incorreto do número pode resultar em bloqueios. Recomenda-se manter as configurações padrão definidas em 'Configurar campanhas' e evitar conteúdos repetitivos utilizando variações de mensagens."
+        },
+        {
+            "pergunta": "Como criar uma lista de contatos para campanhas?",
+            "resposta": "Vá até 'Criar listas', clique em 'Nova lista', insira o nome da lista e adicione contatos manualmente ou importando um arquivo Excel preenchido com nome e número dos contatos. Também é possível editar ou excluir contatos individualmente."
+        },
+        {
+            "pergunta": "Como criar uma nova campanha?",
+            "resposta": "Acesse o menu 'Campanhas', clique em 'Nova campanha', preencha as informações necessárias (nome da campanha, gatilho, lista de contatos ou tag específica), defina a conexão (número) e configure as cinco abas obrigatórias para variações da mensagem. Salve a campanha após a configuração."
+        },
+        {
+            "pergunta": "É possível agendar o envio de uma campanha?",
+            "resposta": "Sim, durante a criação da campanha, você pode definir a data e hora do disparo, além de pausas e reinícios automáticos, se necessário."
+        },
+        {
+            "pergunta": "Como personalizar as mensagens enviadas nas campanhas?",
+            "resposta": "Você pode inserir texto com variáveis como nome, número ou e-mail e também anexar arquivos, caso deseje. É necessário criar cinco variações de mensagens para evitar bloqueios por conteúdo repetitivo."
+        },
+        {
+            "pergunta": "O que fazer se um número não for válido na lista de contatos?",
+            "resposta": "Ao visualizar os contatos da lista, um ícone indicará se o número é válido ou não. Se o número não for válido, ele precisará ser corrigido ou excluído da lista."
+        },
+        {
+            "pergunta": "Como acessar o relatório detalhado de uma campanha?",
+            "resposta": "No menu de ações da campanha, clique no ícone de folha para acessar o relatório detalhado."
+        },
+        {
+            "pergunta": "Posso enviar campanhas para grupos no WhatsApp?",
+            "resposta": "Sim, ao criar uma campanha, há a opção de enviar mensagens para grupos em que o número da empresa participe."
+        },
+        {
+            "pergunta": "O que são avaliações no sistema e para que servem?",
+            "resposta": "As avaliações ajudam a medir a satisfação dos clientes em relação ao atendimento prestado pela equipe. Elas permitem obter um termômetro sobre como os clientes enxergam a empresa e podem ser solicitadas no momento de encerrar um atendimento."
+        },
+        {
+            "pergunta": "Como habilitar o envio de avaliações no sistema?",
+            "resposta": "Para habilitar as avaliações, vá até 'Configurações', procure a opção 'Enviar avaliações', altere de 'Não' para 'Sim' e salve as alterações."
+        },
+        {
+            "pergunta": "Quando as avaliações são solicitadas aos clientes?",
+            "resposta": "As avaliações são solicitadas no momento de finalizar o atendimento, dentro do módulo de chats, quando o atendente clica na opção 'Resolver'."
+        },
+        {
+            "pergunta": "O que acontece se as avaliações estiverem desativadas nas configurações?",
+            "resposta": "Se as avaliações estiverem desativadas, aparecerão apenas duas opções ao resolver o atendimento: 'Resolver sem mensagem de encerramento' e 'Resolver com mensagem de encerramento'. A terceira opção, 'Resolver e enviar avaliação', só será exibida se as avaliações estiverem ativadas."
+        },
+        {
+            "pergunta": "Como cadastrar uma nova avaliação no sistema?",
+            "resposta": "Vá até o menu 'Avaliações', clique em 'Adicionar', preencha o nome da avaliação, a mensagem que será enviada ao cliente e defina as opções de avaliação (ex.: notas de 1 a 3). Salve o cadastro para concluir."
+        },
+        {
+            "pergunta": "É possível personalizar as opções de avaliação?",
+            "resposta": "Sim, você pode definir quantas opções de avaliação forem necessárias, organizando-as conforme a preferência da empresa, como por exemplo notas de 1 a 3, onde 1 é a pior nota e 3 a melhor."
+        },
+        {
+            "pergunta": "Como visualizar as médias das avaliações dos atendentes?",
+            "resposta": "As médias das avaliações dos atendentes podem ser visualizadas no módulo de 'Dashboard', logo após o nome do operador, representadas por ícones com três estrelas."
+        },
+        {
+            "pergunta": "Por que é importante finalizar os atendimentos corretamente?",
+            "resposta": "Finalizar os atendimentos corretamente é essencial para garantir a geração do protocolo correspondente e permitir que a solicitação de avaliação seja enviada ao cliente, obtendo feedbacks valiosos."
+        },
+        {
+            "pergunta": "Onde posso editar ou excluir uma avaliação já cadastrada?",
+            "resposta": "No menu 'Avaliações', localize a avaliação desejada na lista, clique no ícone de lápis para editar ou no ícone de lixeira para excluir."
+        },
+        {
+            "pergunta": "Como funciona a opção 'NPS interno ao operador'?",
+            "resposta": "A opção 'NPS interno ao operador' permite que a avaliação seja específica para um atendente, ajudando a medir o desempenho individual de cada membro da equipe."
+        },
+        {
+            "pergunta": "O que é a mensagem de ausência do operador e como ela difere da mensagem de ausência geral?",
+            "resposta": "A mensagem de ausência do operador é usada para informar os clientes que um atendente específico está temporariamente indisponível, seja por estar em horário de almoço, pausa ou outra razão específica. Diferentemente da mensagem de ausência geral, que indica o horário de funcionamento da empresa, esta é personalizada para cada operador."
+        },
+        {
+            "pergunta": "Como configurar a mensagem de ausência do operador na plataforma?",
+            "resposta": "Para configurar a mensagem de ausência, acesse o ícone de perfil no menu superior e entre em 'Perfil'. Na tela de edição do usuário, localize a caixa 'Mensagem de ausência', insira sua mensagem personalizada e ative a função 'Estou ausente' marcando-a como 'Sim'. Salve as alterações para que a configuração tenha efeito."
+        },
+        {
+            "pergunta": "Quando a mensagem de ausência do operador será enviada automaticamente?",
+            "resposta": "A mensagem de ausência será enviada automaticamente sempre que uma nova mensagem chegar na caixa de conversa do operador, desde que a opção 'Estou ausente' esteja ativada no perfil do usuário."
+        },
+        {
+            "pergunta": "Como desativar a mensagem de ausência do operador?",
+            "resposta": "Para desativar a mensagem de ausência, acesse novamente o perfil do usuário, vá até a seção 'Estou ausente' e mude a configuração para 'Não'. Salve as alterações. Mesmo que a mensagem de ausência esteja cadastrada, ela não será enviada enquanto essa opção estiver desativada."
+        },
+        {
+            "pergunta": "Posso personalizar a mensagem de ausência do operador?",
+            "resposta": "Sim, você pode personalizar a mensagem de ausência conforme necessário. Basta inserir o texto desejado no campo 'Mensagem de ausência' no perfil do usuário e ativar a função 'Estou ausente'."
+        },
+        {
+            "pergunta": "O que é o módulo de Agendamentos e para que serve?",
+            "resposta": "O módulo de Agendamentos permite programar mensagens para serem enviadas automaticamente em dias e horários específicos. É muito utilizado por áreas comerciais, consultórios e centros de cobrança para lembrar clientes de compromissos, enviar promoções ou realizar follow-ups."
+        },
+        {
+            "pergunta": "Como acessar o módulo de Agendamentos?",
+            "resposta": "Para acessar o módulo de Agendamentos, basta ir ao menu principal e clicar na opção 'Agendamentos'. Lá, você verá uma lista de todos os agendamentos feitos no sistema e poderá criar novos agendamentos."
+        },
+        {
+            "pergunta": "Quem pode criar e gerenciar agendamentos no sistema?",
+            "resposta": "Usuários padrão podem criar, editar e excluir seus próprios agendamentos. Já os administradores têm acesso a todos os agendamentos do sistema e podem editá-los ou excluí-los conforme necessário."
+        },
+        {
+            "pergunta": "Como criar um novo agendamento?",
+            "resposta": "Clique no botão 'Novo Agendamento' dentro do módulo de Agendamentos ou no ícone de agendamento no módulo de chat. Preencha os campos necessários, como contato, mensagem, data e hora do envio, conexão (número) e fila (departamento), caso deseje abrir um ticket após o envio."
+        },
+        {
+            "pergunta": "É possível repetir mensagens agendadas?",
+            "resposta": "Sim, ao criar um agendamento, você pode definir se a mensagem será repetida, com que frequência ('repetir a cada X dias' ou 'repetir todo dia específico') e quantas vezes será enviada, podendo ser ilimitado ou limitado a um número fixo de repetições."
+        },
+        {
+            "pergunta": "Posso anexar arquivos em mensagens agendadas?",
+            "resposta": "Sim, ao criar ou editar um agendamento, você pode anexar arquivos clicando no botão de anexar e selecionando o arquivo desejado no seu computador."
+        },
+        {
+            "pergunta": "O que acontece após o envio de uma mensagem agendada?",
+            "resposta": "Após o envio, o status da mensagem será atualizado para 'enviado'. Se a opção de abrir ticket estiver habilitada, um novo atendimento será criado na fila selecionada para acompanhamento do contato."
+        },
+        {
+            "pergunta": "Como visualizar todos os agendamentos no sistema?",
+            "resposta": "No módulo de Agendamentos, você verá uma lista com todos os agendamentos, incluindo informações detalhadas como status (agendado ou enviado), abertura de ticket, repetições e opções de edição/exclusão."
+        },
+        {
+            "pergunta": "Como excluir ou editar um agendamento existente?",
+            "resposta": "Ao lado de cada agendamento na lista, há dois ícones: o de lápis (para editar) e o de lixeira (para excluir). Clique no ícone correspondente à ação desejada. Usuários padrão só podem editar/excluir seus próprios agendamentos, enquanto administradores têm controle total."
+        },
+        {
+            "pergunta": "Como usar o recurso de busca no módulo de Agendamentos?",
+            "resposta": "Na caixa de busca do módulo de Agendamentos, você pode pesquisar por nome do contato ou outros critérios para localizar rapidamente um agendamento específico."
+        }
+    ]
+}
