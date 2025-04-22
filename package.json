@@ -8,7 +8,7 @@
   "private": false,
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "build": "rimraf dist && tsc && (if exist src\\infrastructure\\db\\models\\*.graphql xcopy src\\infrastructure\\db\\models\\*.graphql dist\\infrastructure\\db\\models\\ /Y /I) || echo.",
+    "build": "rimraf dist && tsc && copyfiles -u 1 src/infrastructure/db/models/*.graphql dist/infrastructure/db/models/",
     "start": "node dist/server.js",
     "clean": "rimraf dist",
     "faqs": "npx ts-node src/scripts/seedFAQS.ts",
