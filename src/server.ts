@@ -3,6 +3,7 @@ import cors from "cors";
 import { connectDB } from "./config/database";
 import typebotRoutes from "./presentation/routes/typebotRoutes";
 import dotenv from "dotenv";
+import { setupSwagger } from "./docs/swagger";
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 connectDB();
+setupSwagger(app);
 
 app.get("/", (req, res) => {
   res.json({ status: "SigmaBot API online!" });

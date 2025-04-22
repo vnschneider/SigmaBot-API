@@ -8,6 +8,7 @@ Bem-vindo ao **SigmaBot API**, uma API desenvolvida para gerenciar FAQs e integr
 - **Busca Inteligente**: Busca relevante no banco de dados utilizando índices de texto.
 - **Integração com IA**: Integração com a API DeepSeek para respostas contextuais.
 - **API RESTful**: Endpoints organizados e prontos para uso.
+- **Documentação Swagger**: Documentação interativa para explorar os endpoints da API.
 
 ---
 
@@ -19,6 +20,7 @@ Bem-vindo ao **SigmaBot API**, uma API desenvolvida para gerenciar FAQs e integr
 - **Axios** para requisições HTTP.
 - **Dotenv** para gerenciamento de variáveis de ambiente.
 - **Jest** para testes unitários.
+- **Swagger** para documentação da API.
 
 ---
 
@@ -54,10 +56,15 @@ Bem-vindo ao **SigmaBot API**, uma API desenvolvida para gerenciar FAQs e integr
    ```
 
 5. **Inicie o servidor**:
+
    ```bash
    yarn dev
    ```
+
    O servidor estará rodando em `http://localhost:4000`.
+
+6. **Acesse a documentação da API**:
+   Acesse `http://localhost:4000/api-docs` para visualizar a documentação Swagger da API.
 
 #### 📦 Scripts Disponíveis
 
@@ -75,6 +82,7 @@ SigmaBot-API/
 │ ├── config/ # Configurações do banco de dados
 │ ├── infrastructure/ # Serviços e modelos do banco
 │ ├── presentation/ # Rotas da API
+│ ├── docs/ # Configuração do Swagger
 │ ├── scripts/ # Scripts utilitários
 │ └── [server.ts](http://_vscodecontentref_/0) # Arquivo principal do servidor
 ├── [package.json](http://_vscodecontentref_/1) # Configuração do projeto
