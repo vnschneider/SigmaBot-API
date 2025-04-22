@@ -12,6 +12,10 @@ const SwaggerOptions = {
     },
     servers: [
       {
+        url: "https://sigmabot-api-production.up.railway.app",
+        description: "Servidor de Produção",
+      },
+      {
         url: "http://localhost:4000",
         description: "Servidor de Desenvolvimento",
       },
