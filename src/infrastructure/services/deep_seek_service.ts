@@ -1,77 +1,364 @@
 import axios from "axios";
 import dotenv from "dotenv";
 import { FAQModel } from "../db/models/faq";
+import { ChatModel } from "../db/models/chat";
+import { Types } from "mongoose";
+import crypto from "crypto";
+import { ObjectId, ObjectIdLike } from "bson";
+import { AdminManager } from "../../features/admin/admin.services";
 
 dotenv.config();
 
+// ======================
+// CONSTANTES CONFIGURÁVEIS
+// ======================
+const API_TIMEOUT = 100000; // 5 minutos
+const MAX_RETRIES = 2;
+const MAX_TOKENS = 300; // Limite de tokens por resposta
+const TEMPERATURE = 0.7; // Criatividade das respostas (0-1)
+const MAX_FAQS_CONTEXT = 10; // Máximo de FAQs no contexto
+const MAX_HISTORY_MESSAGES = 10; // Máximo de mensagens no histórico
+const MAX_KEYWORDS = 5; // Máximo de keywords para busca
+const MIN_WORD_LENGTH = 1; // Tamanho mínimo de palavras para keywords
+
+// ======================
+// TIPOS
+// ======================
+export interface ResponseWithContext {
+  answer: string;
+  contextFAQs: Types.ObjectId[];
+  sessionId: string;
+  executionTime?: number;
+}
+
 export class DeepSeekService {
-  static async getResponse(userQuestion: string): Promise<string> {
-    console.log("Pergunta do usuário:", userQuestion);
-    // 1. Busca FAQs relevantes no MongoDB
-    const textSearchResults = (await FAQModel.find(
-      { $text: { $search: userQuestion } } // Busca por similaridade textual
-    )
-      .sort({ score: { $meta: "textScore" } }) // Ordena pela relevância do texto
-      .limit(5)) as Array<{
-      pergunta: any;
-      resposta: any;
-      _id: any;
-    }>; // Define explicit type for _id
+  private static adminManager = new AdminManager();
 
-    const additionalSearchResults = await FAQModel.find({
-      $or: [
-        { pergunta: { $regex: userQuestion, $options: "i" } }, // Busca por regex
-        { tags: { $in: userQuestion.toLowerCase().split(" ") } }, // Busca por tags
-      ],
-    }).limit(5);
-
-    // Combina os resultados, removendo duplicatas
-    const relevantFAQs = [
-      ...textSearchResults,
-      ...additionalSearchResults.filter(
-        (faq) => !textSearchResults.some((result) => result._id.equals(faq._id))
-      ),
-    ].slice(0, 5); // Limita a 5 resultados no total
-
-    // 2. Monta o contexto para o DeepSeek
-    const context = relevantFAQs
-      .map((faq) => `P: ${faq.pergunta}\nR: ${faq.resposta}`)
-      .join("\n\n");
-    console.log("Contexto:", context);
+  static async getResponse(
+    userPhone: string,
+    userQuestion: string,
+    sessionId?: string,
+    executionTime?: number
+  ): Promise<ResponseWithContext> {
+    const startTime = Date.now();
+    let retryCount = 0;
 
     try {
-      const response = await axios.post(
-        "https://api.deepseek.com/v1/chat/completions",
-        {
-          model: "deepseek-chat",
-          messages: [
-            {
-              role: "system",
-              content: `Você é a Rafa, atendente humana da Sigma Network (30 anos, gentil e bem-humorada). 
-              Use este contexto:\n${context}\n\n
-              **Estilo de Resposta:**
-              - Fale como uma amiga experiente (use 1-2 emojis por resposta, exceto em assuntos sérios)
-              - Seja direta, mas mantenha o acolhimento
-              - Para dúvidas complexas: "Vou verificar e te retorno, mas já adianto que..."
-              - Exemplo de tom: "Olha, isso depende do seu plano, mas vou te explicar direitinho! 💡"
-              
-              Se não souber, responda: "Preciso consultar minha equipe, mas prometo que volto com a resposta certinha!"`,
-            },
-            { role: "user", content: userQuestion },
-          ],
-          temperature: 0.5, // Aumentei levemente para permitir criatividade controlada
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-        }
+      // 1. Gerenciamento de sessão otimizado
+      const chatSession = await this.manageChatSession(userPhone, sessionId);
+
+      if (
+        userQuestion.startsWith("SigmaBot config:") ||
+        this.adminManager.isAdminSession(sessionId)
+      ) {
+        return this.adminManager.handleAdminCommand(
+          userPhone,
+          userQuestion,
+          sessionId || "default-session-id"
+        );
+      }
+
+      // 2. Buscar histórico da sessão ativa
+      const chatHistory = await ChatModel.findOne({
+        sessionId: chatSession!.sessionId,
+      }).select("messages.context messages.content messages.sender -_id");
+
+      // 3. Busca de FAQs com priorização
+      const relevantFAQs = await FAQModel.find({
+        $or: [
+          { $text: { $search: userQuestion } },
+          { _id: { $in: this.getPreviousContextIds(chatHistory) } },
+          { tags: { $all: this.extractKeywords(userQuestion) } },
+        ],
+      })
+        .sort({ score: { $meta: "textScore" } })
+        .limit(MAX_FAQS_CONTEXT)
+        .lean();
+
+      // 4. Construção de contexto dinâmico
+      const context = this.buildDynamicContext(
+        relevantFAQs,
+        chatHistory?.messages || []
       );
-      return response.data.choices[0].message.content;
+
+      // 5. Chamada à API com retry mechanism
+      const response = await this.callAPIWithRetry(
+        context,
+        userQuestion,
+        chatHistory?.messages || []
+      );
+
+      // 6. Atualização assíncrona da sessão
+      await this.updateChatSession(chatSession, userQuestion, relevantFAQs);
+
+      const executionTime = Date.now() - startTime;
+      // console.log(`Tempo de execução: ${executionTime}ms`);
+
+      return {
+        answer: response.data.choices[0].message.content,
+        contextFAQs: relevantFAQs.map((faq) => faq._id as Types.ObjectId),
+        sessionId: chatSession!.sessionId,
+        executionTime: executionTime,
+      };
     } catch (error) {
-      console.error("Erro na DeepSeek API:", error);
-      return "Desculpe, estou com dificuldades. Tente novamente mais tarde.";
+      return this.handleError(error, startTime, sessionId);
     }
+  }
+
+  // ======================
+  // MÉTODOS AUXILIARES
+  // ======================
+  private static async manageChatSession(
+    userPhone: string,
+    sessionId?: string
+  ) {
+    return ChatModel.findOneAndUpdate(
+      { userPhone, ...(sessionId && { sessionId }), status: "active" },
+      {
+        $setOnInsert: {
+          sessionId: sessionId || crypto.randomUUID(),
+          userPhone,
+          status: "active",
+          createdAt: new Date(),
+        },
+        $set: { updatedAt: new Date() },
+      },
+      { new: true, upsert: !sessionId, setDefaultsOnInsert: true }
+    ).lean();
+  }
+
+  private static getPreviousContextIds(chatHistory?: any): Types.ObjectId[] {
+    return (
+      chatHistory?.messages
+        ?.flatMap((msg: { context: any }) => msg.context)
+        ?.filter(
+          (
+            id:
+              | string
+              | number
+              | ObjectId
+              | Uint8Array<ArrayBufferLike>
+              | ObjectIdLike
+          ) => Types.ObjectId.isValid(id)
+        ) || []
+    );
+  }
+
+  private static async callAPIWithRetry(
+    context: string,
+    userQuestion: string,
+    history: any[]
+  ) {
+    let retryCount = 0;
+
+    while (retryCount < MAX_RETRIES) {
+      try {
+        return await axios.post(
+          "https://api.deepseek.com/v1/chat/completions",
+          {
+            model: "deepseek-chat",
+            messages: this.buildMessageStack(context, userQuestion, history),
+            temperature: TEMPERATURE,
+            max_tokens: MAX_TOKENS,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            timeout: API_TIMEOUT,
+          }
+        );
+      } catch (error) {
+        retryCount++;
+        if (retryCount >= MAX_RETRIES || !this.isRetryableError(error)) {
+          throw error;
+        }
+        await new Promise((resolve) =>
+          setTimeout(resolve, 1000 * Math.pow(2, retryCount))
+        );
+      }
+    }
+    throw new Error("Número máximo de tentativas excedido");
+  }
+
+  private static buildMessageStack(
+    context: string,
+    userQuestion: string,
+    history: any[]
+  ) {
+    const systemMessage = {
+      role: "system",
+      content: `Você é a Rafa, atendente da Sigma Network. Contexto atual:\n${context}\n\n
+        Diretrizes:
+        1. Mantenha conversação natural usando histórico
+        2. Refira-se a informações anteriores quando relevante
+        3. Use emojis apenas para feedback positivo
+        4. Exemplo: "Como mencionei antes, vamos verificar juntos... 🧐"`,
+    };
+
+    const validHistory = history
+      .filter(
+        (msg) =>
+          msg.content?.trim() && ["user", "assistant"].includes(msg.sender)
+      )
+      .slice(-MAX_HISTORY_MESSAGES)
+      .map((msg) => ({
+        role: msg.sender === "user" ? "user" : "assistant",
+        content: msg.content.trim(),
+      }));
+
+    return [
+      systemMessage,
+      ...validHistory,
+      {
+        role: "user",
+        content: userQuestion,
+        metadata: { source: "user_input" },
+      },
+    ];
+  }
+
+  private static buildDynamicContext(faqs: any[], messageHistory: any[]) {
+    const lastInteractionSummary =
+      messageHistory
+        .slice(-MAX_HISTORY_MESSAGES)
+        .map(
+          (msg) =>
+            `${msg.sender === "user" ? "Cliente" : "Rafa"}: ${
+              msg.content?.trim() || "(Mensagem não disponível)"
+            }`
+        )
+        .join("\n") || "Nenhum histórico anterior";
+
+    const knowledgeBase =
+      faqs.length > 0
+        ? faqs
+            .slice(0, MAX_FAQS_CONTEXT)
+            .map(
+              (faq) =>
+                `[FAQ-${faq._id}] Pergunta: ${faq.pergunta}\nResposta Base: ${faq.resposta}`
+            )
+            .join("\n\n")
+        : "Base de conhecimento não encontrada para esta consulta";
+
+    return `**Interações Recentes:**\n${lastInteractionSummary}\n\n**Base de Conhecimento:**\n${knowledgeBase}`;
+  }
+
+  private static extractKeywords(text: string): string[] {
+    const stopWords = new Set([
+      "como",
+      "para",
+      "com",
+      "sem",
+      "por",
+      "quero",
+      "preciso",
+      "você",
+      "fazer",
+      "saber",
+      "onde",
+      "qual",
+      "quais",
+    ]);
+
+    return text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .split(/\W+/)
+      .filter((word) => word.length > MIN_WORD_LENGTH && !stopWords.has(word))
+      .slice(0, MAX_KEYWORDS);
+  }
+
+  private static async updateChatSession(
+    chatSession: any,
+    userQuestion: string,
+    relevantFAQs: any[]
+  ) {
+    try {
+      await ChatModel.findByIdAndUpdate(
+        chatSession._id,
+        {
+          $push: {
+            messages: {
+              content: userQuestion,
+              sender: "user",
+              context: relevantFAQs.map((faq) => faq._id),
+              timestamp: new Date(),
+            },
+          },
+        },
+        { new: true }
+      );
+    } catch (error) {
+      console.error("Erro ao atualizar sessão:", error);
+    }
+  }
+
+  private static handleError(
+    error: any,
+    startTime: number,
+    sessionId?: string
+  ): ResponseWithContext {
+    const executionTime = Date.now() - startTime;
+    console.error(`Erro após ${executionTime}ms:`, this.sanitizeError(error));
+
+    if (this.isTimeoutError(error)) {
+      return {
+        answer:
+          "Hmm, acho que pensei mais do que consigo te falar haha. O que você perguntou mesmo?",
+        contextFAQs: [],
+        sessionId: sessionId || crypto.randomUUID(),
+        executionTime,
+      };
+    }
+
+    if (this.isEmptyContextError(error)) {
+      return {
+        answer:
+          "Parece que não encontrei informações sobre isso ainda. Poderia reformular ou perguntar algo diferente?",
+        contextFAQs: [],
+        sessionId: sessionId || crypto.randomUUID(),
+        executionTime,
+      };
+    }
+
+    return {
+      answer:
+        "Estou ajustando meus sistemas, por favor tente novamente em instantes! ⚙️",
+      contextFAQs: [],
+      sessionId:
+        sessionId || "error-session-" + crypto.randomUUID().substring(0, 8),
+      executionTime,
+    };
+  }
+
+  private static isTimeoutError(error: any): boolean {
+    return error.code === "ECONNABORTED" || error.message.includes("timeout");
+  }
+
+  private static isEmptyContextError(error: any): boolean {
+    return error.response?.data?.error?.type === "invalid_request_error";
+  }
+
+  private static isRetryableError(error: any): boolean {
+    return (
+      !error.response ||
+      (error.response.status >= 500 && error.response.status < 600)
+    );
+  }
+
+  private static sanitizeError(error: any) {
+    if (!error) return error;
+
+    return {
+      message: error.message,
+      code: error.code,
+      config: error.config
+        ? { url: error.config.url, method: error.config.method }
+        : undefined,
+      response: error.response ? { status: error.response.status } : undefined,
+    };
   }
 }

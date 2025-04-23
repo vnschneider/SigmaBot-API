@@ -16,12 +16,3 @@ export const connectDB = async () => {
     process.exit(1);
   }
 };
-
-// Eventos de conexão
-mongoose.connection.on("connected", () => {
-  console.log("Mongoose conectado ao DB");
-});
-
-mongoose.connection.on("error", (err) => {
-  console.log("Mongoose erro na conexão:", err);
-});
