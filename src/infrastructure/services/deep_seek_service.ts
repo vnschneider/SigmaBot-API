@@ -30,7 +30,7 @@ export interface ResponseWithContext {
   contextFAQs: Types.ObjectId[];
   sessionId: string;
   executionTime?: number;
-  transferToHuman?: boolean; // NOVO: flag para transferir para atendente
+  transferToHuman?: boolean;
 }
 
 export class DeepSeekService {
@@ -69,7 +69,7 @@ export class DeepSeekService {
             contextFAQs: [],
             sessionId: chatSession.sessionId,
             executionTime: Date.now() - startTime,
-            transferToHuman: true,
+            transferToHuman: true, // <-- Corrigido: sempre retorna true na confirmação
           };
         } else if (this.isCancel(userQuestion)) {
           await ChatModel.findByIdAndUpdate(chatSession._id, {
@@ -296,8 +296,6 @@ export class DeepSeekService {
   }
 
   private static extractKeywords(text: string): string[] {
-
-
     return text
       .toLowerCase()
       .normalize("NFD")
