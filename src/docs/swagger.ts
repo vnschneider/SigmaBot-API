@@ -12,7 +12,7 @@ const SwaggerOptions = {
     },
     servers: [
       {
-        url: "https://sigmabot-api-production.up.railway.app",
+        url: "http://189.90.44.226:4000/",
         description: "Servidor de Produção",
       },
       {
@@ -42,5 +42,4 @@ const swaggerSpec = swaggerJsDoc(SwaggerOptions);
 
 export const setupSwagger = (app: Express): void => {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
- 
 };

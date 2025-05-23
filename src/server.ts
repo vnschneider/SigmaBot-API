@@ -72,9 +72,11 @@ class Server {
   public start(): void {
     this.initializeServices().then(() => {
       this.app.listen(this.PORT, () => {
-        console.log(`\n🚀 Servidor rodando em http://localhost:${this.PORT}`);
         console.log(
-          `📚 Documentação disponível em http://localhost:${this.PORT}/api-docs`
+          `\n🚀 Servidor rodando em http://localhost:${this.PORT} ou http://189.90.44.226:4000/`
+        );
+        console.log(
+          `📚 Documentação disponível em http://localhost:${this.PORT}/api-docs ou http://189.90.44.226:4000/api-docs`
         );
       });
     });
