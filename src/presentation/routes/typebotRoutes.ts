@@ -60,7 +60,17 @@ function findRelatedFAQs(faq: any, allFAQs: any[]): Types.ObjectId[] {
 
 // --- FIM dos utilitários ---
 
-const faqsJsonPath = path.resolve(__dirname, "../../scripts/faqs.json");
+// Corrija o path do faqs.json para funcionar em produção (Docker/dist)
+const faqsJsonPath = (() => {
+  // Tenta encontrar o arquivo tanto em src/scripts (dev) quanto em dist/scripts (prod)
+  const devPath = path.resolve(__dirname, "../../scripts/faqs.json");
+  const prodPath = path.resolve(__dirname, "../scripts/faqs.json");
+  if (fs.existsSync(devPath)) return devPath;
+  if (fs.existsSync(prodPath)) return prodPath;
+  // Fallback: retorna o devPath (vai dar erro explícito se não existir)
+  return devPath;
+})();
+
 function readFaqsJson() {
   const raw = fs.readFileSync(faqsJsonPath, "utf-8");
   return JSON.parse(raw);
