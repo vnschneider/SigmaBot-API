@@ -15,6 +15,7 @@
     "test": "jest --watchAll",
     "lint": "eslint src --ext .ts",
     "docker:db": "docker run -d -p 27017:27017 --name mongo-sigmabot -v mongodb_data:/data/db mongo",
+    "docker:api": "docker build -t sigmabot-api . && docker run --env-file .env -p 4000:4000 sigmabot-api",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

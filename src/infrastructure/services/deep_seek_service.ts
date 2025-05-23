@@ -6,6 +6,7 @@ import { Types } from "mongoose";
 import crypto from "crypto";
 import { ObjectId, ObjectIdLike } from "bson";
 import { AdminManager } from "../../features/admin/admin.services";
+import { STOP_WORDS } from "../../utils/utils";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ export interface ResponseWithContext {
   contextFAQs: Types.ObjectId[];
   sessionId: string;
   executionTime?: number;
+  transferToHuman?: boolean; // NOVO: flag para transferir para atendente
 }
 
 export class DeepSeekService {
@@ -45,22 +47,72 @@ export class DeepSeekService {
 
     try {
       // 1. Gerenciamento de sessão otimizado
-      const chatSession = await this.manageChatSession(userPhone, sessionId);
+      const chatSession: any = await this.manageChatSession(
+        userPhone,
+        sessionId
+      );
 
-      if (
-        userQuestion.startsWith("SigmaBot config:") ||
-        this.adminManager.isAdminSession(sessionId)
-      ) {
-        return this.adminManager.handleAdminCommand(
-          userPhone,
-          userQuestion,
-          sessionId || "default-session-id"
-        );
+      if (!chatSession) {
+        throw new Error("Falha ao criar ou recuperar sessão do chat.");
+      }
+
+      // NOVO: Verifica se já está aguardando atendente
+      if (chatSession.waitingForHuman) {
+        // Confirmação do usuário para transferência
+        if (this.isConfirmation(userQuestion)) {
+          await ChatModel.findByIdAndUpdate(chatSession._id, {
+            $set: { waitingForHuman: false, transferredToHuman: true },
+          });
+          return {
+            answer:
+              "Certo! Vou transferir sua conversa para um atendente humano. Em breve alguém da equipe entrará em contato com você. 😊",
+            contextFAQs: [],
+            sessionId: chatSession.sessionId,
+            executionTime: Date.now() - startTime,
+            transferToHuman: true,
+          };
+        } else if (this.isCancel(userQuestion)) {
+          await ChatModel.findByIdAndUpdate(chatSession._id, {
+            $set: { waitingForHuman: false },
+          });
+          return {
+            answer:
+              "Ok, não vou transferir. Se precisar de um atendente, é só avisar!",
+            contextFAQs: [],
+            sessionId: chatSession.sessionId,
+            executionTime: Date.now() - startTime,
+            transferToHuman: false,
+          };
+        } else {
+          return {
+            answer:
+              "Só para confirmar, você deseja mesmo falar com um atendente humano? (Responda 'sim' para confirmar ou 'não' para cancelar)",
+            contextFAQs: [],
+            sessionId: chatSession.sessionId,
+            executionTime: Date.now() - startTime,
+            transferToHuman: false,
+          };
+        }
+      }
+
+      // NOVO: Detecta pedido de atendimento humano
+      if (this.isHumanRequest(userQuestion)) {
+        await ChatModel.findByIdAndUpdate(chatSession._id, {
+          $set: { waitingForHuman: true },
+        });
+        return {
+          answer:
+            "Você gostaria de ser atendido por um humano? Responda 'sim' para confirmar ou 'não' para continuar comigo.",
+          contextFAQs: [],
+          sessionId: chatSession.sessionId,
+          executionTime: Date.now() - startTime,
+          transferToHuman: false,
+        };
       }
 
       // 2. Buscar histórico da sessão ativa
       const chatHistory = await ChatModel.findOne({
-        sessionId: chatSession!.sessionId,
+        sessionId: chatSession.sessionId,
       }).select("messages.context messages.content messages.sender -_id");
 
       // 3. Busca de FAQs com priorização
@@ -91,14 +143,12 @@ export class DeepSeekService {
       // 6. Atualização assíncrona da sessão
       await this.updateChatSession(chatSession, userQuestion, relevantFAQs);
 
-      const executionTime = Date.now() - startTime;
-      // console.log(`Tempo de execução: ${executionTime}ms`);
-
       return {
         answer: response.data.choices[0].message.content,
         contextFAQs: relevantFAQs.map((faq) => faq._id as Types.ObjectId),
-        sessionId: chatSession!.sessionId,
-        executionTime: executionTime,
+        sessionId: chatSession.sessionId,
+        executionTime: Date.now() - startTime,
+        transferToHuman: false,
       };
     } catch (error) {
       return this.handleError(error, startTime, sessionId);
@@ -111,7 +161,7 @@ export class DeepSeekService {
   private static async manageChatSession(
     userPhone: string,
     sessionId?: string
-  ) {
+  ): Promise<any> {
     return ChatModel.findOneAndUpdate(
       { userPhone, ...(sessionId && { sessionId }), status: "active" },
       {
@@ -246,28 +296,14 @@ export class DeepSeekService {
   }
 
   private static extractKeywords(text: string): string[] {
-    const stopWords = new Set([
-      "como",
-      "para",
-      "com",
-      "sem",
-      "por",
-      "quero",
-      "preciso",
-      "você",
-      "fazer",
-      "saber",
-      "onde",
-      "qual",
-      "quais",
-    ]);
+
 
     return text
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .split(/\W+/)
-      .filter((word) => word.length > MIN_WORD_LENGTH && !stopWords.has(word))
+      .filter((word) => word.length > MIN_WORD_LENGTH && !STOP_WORDS.has(word))
       .slice(0, MAX_KEYWORDS);
   }
 
@@ -360,5 +396,32 @@ export class DeepSeekService {
         : undefined,
       response: error.response ? { status: error.response.status } : undefined,
     };
+  }
+
+  // NOVO: Detecta frases de solicitação de atendimento humano
+  private static isHumanRequest(text: string): boolean {
+    const patterns = [
+      /falar com (um )?(atendente|humano|pessoa|suporte|consultor)/i,
+      /quero (ajuda|suporte|atendimento) humano/i,
+      /preciso de (ajuda|suporte|atendente)/i,
+      /transferir para (humano|atendente)/i,
+      /posso falar com (algu[eé]m|um atendente)/i,
+      /humano/i,
+      /atendente/i,
+      /suporte/i,
+    ];
+    return patterns.some((p) => p.test(text));
+  }
+
+  // NOVO: Detecta confirmação do usuário
+  private static isConfirmation(text: string): boolean {
+    return /^(sim|confirmo|quero|pode|ok|isso|claro|por favor)$/i.test(
+      text.trim()
+    );
+  }
+
+  // NOVO: Detecta cancelamento do usuário
+  private static isCancel(text: string): boolean {
+    return /^(não|nao|cancela|cancelar|desistir|parei)$/i.test(text.trim());
   }
 }

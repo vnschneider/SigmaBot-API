@@ -22,7 +22,7 @@ class Server {
 
   private configureMiddleware(): void {
     this.app.use(cors());
-  
+
     this.app.use(
       express.json({
         strict: true,
@@ -39,9 +39,9 @@ class Server {
 
   private configureRoutes(): void {
     this.app.get("/", (req, res) => {
-      res.json({ 
+      res.json({
         status: "SigmaBot API online!",
-        worker: this.chatWorker ? "active" : "inactive"
+        worker: this.chatWorker ? "active" : "inactive",
       });
     });
 
@@ -51,18 +51,20 @@ class Server {
   private async initializeServices(): Promise<void> {
     try {
       await connectDB();
-      console.log('📦 Conectado ao banco de dados');
+      console.log("📦 Conectado ao banco de dados");
 
-      if (process.env.ENABLE_CHAT_WORKER === 'true') {
+      if (process.env.ENABLE_CHAT_WORKER === "true") {
         this.chatWorker = new ChatWorker();
-        console.log('👷 Worker de chats iniciado');
+        console.log("👷 Worker de chats iniciado");
       } else {
-        console.log('⏸️ Worker de chats desabilitado (ENABLE_CHAT_WORKER=false)');
+        console.log(
+          "⏸️ Worker de chats desabilitado (ENABLE_CHAT_WORKER=false)"
+        );
       }
 
       setupSwagger(this.app as express.Express);
     } catch (error) {
-      console.error('❌ Falha na inicialização:', error);
+      console.error("❌ Falha na inicialização:", error);
       process.exit(1);
     }
   }
@@ -71,7 +73,9 @@ class Server {
     this.initializeServices().then(() => {
       this.app.listen(this.PORT, () => {
         console.log(`\n🚀 Servidor rodando em http://localhost:${this.PORT}`);
-        console.log(`📚 Documentação disponível em http://localhost:${this.PORT}/api-docs`);
+        console.log(
+          `📚 Documentação disponível em http://localhost:${this.PORT}/api-docs`
+        );
       });
     });
   }

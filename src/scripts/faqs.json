@@ -305,66 +305,6 @@
       "resposta": "A base de conhecimento e central de ajuda estão disponíveis diretamente na plataforma, com vídeos explicativos e tutoriais que auxiliam na configuração e uso das funcionalidades."
     },
     {
-      "pergunta": "O que é o modelo de fila única no Master Zap?",
-      "resposta": "O modelo de fila única é utilizado quando um cliente entra em contato com a empresa e é direcionado diretamente para o setor de atendimento, sem passar por um menu de opções. É ideal para negócios que não precisam segmentar atendimentos por departamentos."
-    },
-    {
-      "pergunta": "Como configurar o modelo de fila única no Master Zap?",
-      "resposta": "Para configurar o modelo de fila única, crie uma fila chamada 'Atendimento' em 'Filas e Chatbot', defina nome, ordem e cor, configure os horários de atendimento e associe essa fila à conexão WhatsApp em 'Conexões'. Em seguida, edite os usuários na aba 'Equipe' para permitir acesso à fila criada."
-    },
-    {
-      "pergunta": "O que é o modelo de menu interativo no Master Zap?",
-      "resposta": "O modelo de menu interativo permite que o cliente escolha uma das opções apresentadas, como 'financeiro', 'comercial' ou 'vendas', e seja redirecionado para um departamento específico ou siga um fluxo estratégico com automações. Isso minimiza o tempo de atendimento e torna o processo mais ágil."
-    },
-    {
-      "pergunta": "Como criar um menu interativo no Master Zap?",
-      "resposta": "Para criar um menu interativo, acesse 'Filas e Chatbot', crie filas para cada opção do menu (ex.: 'Fazer um orçamento', 'Assistência técnica'), configure tags para identificar as etapas e utilize o Flow Builder para criar o fluxo de automação com mensagens, perguntas e redirecionamentos."
-    },
-    {
-      "pergunta": "Quais são as configurações básicas necessárias no Master Zap?",
-      "resposta": "As configurações básicas incluem habilitar 'Enviar avaliações', definir 'Gerenciamento por fila', ativar 'Ignorar mensagens de grupos', configurar 'Chamada de voz pelo WhatsApp', ajustar 'Tipo chatbot' para texto, habilitar 'Abrir ticket fora do expediente' e configurar opções de operador e logs conforme necessário."
-    },
-    {
-      "pergunta": "Como conectar o WhatsApp ao Master Zap?",
-      "resposta": "Vá em 'Conexões', clique em 'Adicionar WhatsApp', defina um nome, marque como padrão, ative a confirmação de leitura e salve. Abra o WhatsApp Business no celular, acesse 'Dispositivos Conectados', escaneie o QR Code gerado e aguarde a mensagem 'Conexão estabelecida'."
-    },
-    {
-      "pergunta": "Como criar uma resposta rápida no Master Zap?",
-      "resposta": "Acesse 'Respostas Rápidas', clique em 'Adicionar', defina um atalho (ex.: 'redes sociais'), use tags como {{fn}} para personalização, marque como 'global' para disponibilizar a todos os usuários e salve."
-    },
-    {
-      "pergunta": "O que são tags e como usá-las no Master Zap?",
-      "resposta": "Tags são marcadores que ajudam a organizar os atendimentos. Elas podem ser criadas em 'Tags', atribuídas durante o atendimento e usadas para agrupar contatos no Kanban. Para criar uma tag, insira nome, cor, tipo e ative a opção CBAN se desejar organizá-la no quadro visual."
-    },
-    {
-      "pergunta": "Como testar o sistema após configurar uma fila única?",
-      "resposta": "Após configurar a fila única, acesse uma aba anônima, entre com um usuário comum criado e simule um atendimento. Verifique se a mensagem aparece para o usuário e se o fluxo de atendimento está funcionando conforme esperado."
-    },
-    {
-      "pergunta": "Como usar o Flow Builder no Master Zap?",
-      "resposta": "O Flow Builder permite criar fluxos de automação. Para usá-lo, clique em 'Adicionar fluxo', nomeie o fluxo, adicione blocos para mensagens, perguntas e redirecionamentos, conecte os blocos conforme a lógica desejada e finalize o fluxo com uma ação clara."
-    },
-    {
-      "pergunta": "O que é o botão Whisper no Master Zap?",
-      "resposta": "O botão Whisper (ícone de balão azul) permite enviar mensagens internas visíveis apenas para a equipe durante o atendimento. Desativando o Whisper, a mensagem volta a ser visível para o cliente."
-    },
-    {
-      "pergunta": "Como garantir que o cliente receba uma mensagem fora do expediente?",
-      "resposta": "Para garantir que o cliente receba uma mensagem fora do expediente, configure os horários de atendimento na aba 'Horários de Atendimento' da fila e insira uma mensagem automática que será enviada quando o cliente entrar em contato fora do horário estabelecido."
-    },
-    {
-      "pergunta": "Como transferir um atendimento entre setores no Master Zap?",
-      "resposta": "Durante o atendimento, use a opção de transferência para encaminhar o contato para outro setor, usuário específico ou devolvê-lo para a fila de espera. O sistema registra a origem e o destino do atendimento."
-    },
-    {
-      "pergunta": "O que fazer se o cliente não responder durante a automação?",
-      "resposta": "Configure uma regra em 'Conexões' para redirecionar o contato caso ele não responda dentro de um determinado tempo (ex.: 5 minutos). Isso evita que o cliente fique travado no sistema."
-    },
-    {
-      "pergunta": "Como acessar a base de conhecimento e central de ajuda do Master Zap?",
-      "resposta": "A base de conhecimento e central de ajuda estão disponíveis diretamente na plataforma, com vídeos explicativos e tutoriais que auxiliam na configuração e uso das funcionalidades."
-    },
-    {
       "pergunta": "O que são respostas rápidas e para que servem?",
       "resposta": "Respostas rápidas são mensagens pré-definidas que podem ser utilizadas durante o atendimento para agilizar a comunicação. Elas são úteis para enviar informações recorrentes, como dados bancários, endereços ou detalhes de produtos, sem a necessidade de digitar manualmente a cada vez."
     },
@@ -651,38 +591,6 @@
     {
       "pergunta": "Por que nomear o dispositivo ao conectar o WhatsApp?",
       "resposta": "Ao conectar o WhatsApp, o sistema solicita um nome para o dispositivo. Isso ajuda a organizar e identificar as conexões ativas, especialmente quando há várias conexões configuradas."
-    },
-    {
-      "pergunta": "O que é o chat interno e para que serve?",
-      "resposta": "O chat interno é uma ferramenta de comunicação interna dentro da plataforma, que substitui a necessidade de usar grupos de WhatsApp para conversas entre equipes. Ele centraliza a comunicação em um só lugar, permitindo criar chats específicos para setores ou grupos de usuários."
-    },
-    {
-      "pergunta": "Como acessar o módulo de chat interno?",
-      "resposta": "Para acessar o chat interno, basta clicar na opção 'Chat Interno' no menu principal do sistema."
-    },
-    {
-      "pergunta": "Como criar um novo chat interno?",
-      "resposta": "Dentro do módulo 'Chat Interno', clique em 'Nova Conversa'. Insira um título para o chat e, na guia 'Filtro de Usuários', selecione os participantes que farão parte do grupo. Após configurar, o chat estará criado e pronto para uso."
-    },
-    {
-      "pergunta": "Quem pode criar chats internos?",
-      "resposta": "Por padrão, apenas administradores podem criar chats internos. No entanto, há uma configuração nas 'Configurações' que permite liberar essa função para usuários comuns, caso desejado."
-    },
-    {
-      "pergunta": "É possível enviar arquivos no chat interno?",
-      "resposta": "Sim, no chat interno é possível enviar mensagens e anexar arquivos. Os participantes recebem notificações sempre que uma nova mensagem é enviada."
-    },
-    {
-      "pergunta": "Como excluir um chat interno?",
-      "resposta": "Para excluir um chat interno, localize o grupo que deseja apagar, clique no ícone de lixeira ao lado dele e confirme a exclusão. Apenas o criador do chat (administrador ou usuário comum, dependendo da configuração) pode realizar essa ação."
-    },
-    {
-      "pergunta": "Por que é recomendável restringir a criação de chats internos aos administradores?",
-      "resposta": "Permitir que todos os usuários criem chats internos pode gerar desorganização, pois muitos grupos podem ser criados sem controle, dificultando a gestão das conversas internas. Por isso, recomenda-se manter essa função restrita aos administradores."
-    },
-    {
-      "pergunta": "Os usuários recebem notificações quando uma mensagem é enviada no chat interno?",
-      "resposta": "Sim, toda vez que uma mensagem é enviada no chat interno, os participantes recebem uma notificação no ícone correspondente na barra superior do sistema."
     },
     {
       "pergunta": "O que é o chat interno e para que serve?",

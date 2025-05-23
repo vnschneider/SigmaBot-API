@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: mongo-sigmabot
+    restart: always
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  api:
+    build: .
+    container_name: sigmabot-api
+    restart: always
+    ports:
+      - "${API_PORT:-4000}:4000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+
+volumes:
+  mongodb_data:

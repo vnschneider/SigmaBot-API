@@ -1,26 +1,34 @@
 # SigmaBot API 🤖
 
-Bem-vindo ao **SigmaBot API**, uma API desenvolvida para gerenciar FAQs e integrar com serviços de IA para fornecer respostas inteligentes e automatizadas. 🚀
+Bem-vindo ao **SigmaBot API**, uma solução robusta para gerenciamento de FAQs, automação de atendimento, integração com IA e administração de operações via chat ou REST.  
+Ideal para empresas que desejam centralizar conhecimento, automatizar respostas e monitorar métricas do atendimento.
+
+---
 
 ## 📋 Funcionalidades
 
-- **Gerenciamento de FAQs**: CRUD de perguntas e respostas frequentes.
-- **Busca Inteligente**: Busca relevante no banco de dados utilizando índices de texto.
-- **Integração com IA**: Integração com a API DeepSeek para respostas contextuais.
-- **API RESTful**: Endpoints organizados e prontos para uso.
-- **Documentação Swagger**: Documentação interativa para explorar os endpoints da API.
+- **Gerenciamento de FAQs**: CRUD completo de perguntas frequentes, importação/exportação, sincronização com arquivo local e enriquecimento automático dos dados.
+- **Busca Inteligente**: Busca textual avançada e contexto dinâmico para respostas mais relevantes.
+- **Integração com IA**: Respostas contextuais via DeepSeek, com fallback inteligente e histórico de conversas.
+- **Webhook seguro**: Receba e responda mensagens do Typebot com autenticação HMAC.
+- **Administração via Chat**: Menu administrativo para métricas, FAQs, autenticação e configuração de persona, tudo pelo WhatsApp/chat.
+- **Métricas do Sistema**: Endpoint REST para consulta de métricas em tempo real (chats ativos, FAQs, uso de memória, uptime, etc).
+- **Documentação Swagger**: Interface interativa para explorar e testar todos os endpoints da API.
+- **Scripts utilitários**: População de FAQs, seed, importação/exportação, etc.
+- **Testes unitários**: Cobertura de lógica crítica com Jest.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Node.js** com **Express** para o backend.
-- **MongoDB** com **Mongoose** para o banco de dados.
-- **TypeScript** para tipagem estática.
-- **Axios** para requisições HTTP.
-- **Dotenv** para gerenciamento de variáveis de ambiente.
-- **Jest** para testes unitários.
-- **Swagger** para documentação da API.
+- **Node.js** + **Express** (backend)
+- **MongoDB** + **Mongoose** (banco de dados)
+- **TypeScript** (tipagem estática)
+- **Axios** (requisições HTTP)
+- **Dotenv** (variáveis de ambiente)
+- **Jest** (testes)
+- **Swagger** (documentação)
+- **Docker** (ambiente de desenvolvimento e produção)
 
 ---
 
@@ -29,91 +37,161 @@ Bem-vindo ao **SigmaBot API**, uma API desenvolvida para gerenciar FAQs e integr
 ### Pré-requisitos
 
 - **Node.js** (v16 ou superior)
-- **MongoDB** (local ou via Docker)
 - **Yarn** (Gerenciador de pacotes)
+- **Docker** (para rodar MongoDB e/ou a API facilmente)
+- **MongoDB** (caso prefira rodar localmente, mas Docker é recomendado)
+
+> **Importante:**  
+> É necessário criar e configurar o arquivo `.env` na raiz do projeto com todas as variáveis de ambiente necessárias para a API e o banco.  
+> **A lista completa das variáveis de ambiente está disponível na aba Issues do repositório no GitHub, em "environment variables".**  
+> Exemplos de variáveis: `MONGO_URI`, `DEEPSEEK_API_KEY`, `MASTER_KEY`, etc.
 
 ### Passos
 
 1. **Clone o repositório**:
+
    ```bash
    git clone https://github.com/vnschneider/SigmaBot-API.git
    cd SigmaBot-API
    ```
 
-````
 2. **Instale as dependências**:
+
    ```bash
    yarn install
-````
+   ```
 
 3. **Configure as variáveis de ambiente**:
-   Crie um arquivo `.env` na raiz do projeto e adicione as variáveis de ambiente necessárias (acesse a aba Issues para mais informações).
+   Crie um arquivo `.env` na raiz do projeto e adicione as variáveis necessárias (consulte a documentação interna ou a aba Issues para detalhes).
 
-4. **Inicie o MongoDB** (se não estiver usando o banco de dados localmente):
+4. **Inicie o MongoDB via Docker** (recomendado):
 
    ```bash
    yarn docker:db
    ```
 
-5. **Inicie o servidor**:
+   > Ou configure o MongoDB localmente conforme sua preferência.
+
+5. **Popule o banco de dados com FAQs de exemplo** (opcional, mas recomendado para testes):
+
+   ```bash
+   yarn faqs
+   ```
+
+6. **Inicie o servidor em modo desenvolvimento**:
 
    ```bash
    yarn dev
    ```
 
-   O servidor estará rodando em `http://localhost:4000`.
+   O servidor estará disponível em `http://localhost:4000`.
 
-6. **Acesse a documentação da API**:
-   Acesse `http://localhost:4000/api-docs` para visualizar a documentação Swagger da API.
+7. **Acesse a documentação Swagger**:
+   - Navegue até `http://localhost:4000/api-docs` para explorar e testar todos os endpoints da API.
 
-#### 📦 Scripts Disponíveis
+---
 
-- `yarn dev`: Inicia o servidor em modo de desenvolvimento.
+### 📦 Scripts Disponíveis
+
+- `yarn dev`: Inicia o servidor em modo de desenvolvimento (hot reload).
 - `yarn build`: Compila o projeto para produção.
 - `yarn start`: Inicia o servidor em modo de produção.
 - `yarn test`: Executa os testes unitários.
-- `yarn docker:db`: Inicia o MongoDB via Docker.
-- `yarn faqs`: Popula o banco de dados com FAQs de exemplo.
+- `yarn docker:db`: Sobe o MongoDB via Docker.
+- `yarn docker:api`: Sobe a API em container Docker.
+- `yarn faqs`: Popula o banco de dados com FAQs de exemplo (seed).
 
-#### 📚 Estrutura do Projeto
+---
 
+### 📚 Estrutura do Projeto
+
+```
 SigmaBot-API/
 ├── src/
-│ ├── config/ # Configurações do banco de dados
-│ ├── infrastructure/ # Serviços e modelos do banco
-│ ├── presentation/ # Rotas da API
-│ ├── docs/ # Configuração do Swagger
-│ ├── scripts/ # Scripts utilitários
-│ └── [server.ts](http://_vscodecontentref_/0) # Arquivo principal do servidor
-├── [package.json](http://_vscodecontentref_/1) # Configuração do projeto
-├── [README.md](http://_vscodecontentref_/2) # Documentação
-└── .env # Variáveis de ambiente
+│   ├── config/           # Configurações do banco de dados
+│   ├── infrastructure/   # Serviços, modelos e integrações externas
+│   ├── features/         # Domínios de negócio (admin, faqs, persona, etc)
+│   ├── presentation/     # Rotas e controllers da API
+│   ├── docs/             # Configuração e anotações Swagger
+│   ├── scripts/          # Scripts utilitários (seed, import/export)
+│   └── server.ts         # Arquivo principal do servidor
+├── package.json
+├── README.md
+├── .env                  # Variáveis de ambiente
+└── docker-compose.yml    # (opcional) Orquestração Docker
+```
 
-#### 🧪 Testes
+---
+
+### 🧪 Testes
+
+Execute todos os testes unitários:
 
 ```bash
 yarn test
 ```
 
-#### 🐳 Docker
+---
 
-**Inicie o MongoDB**
+### 🐳 Docker
+
+**Suba o MongoDB:**
 
 ```bash
 yarn docker:db
 ```
 
-**Inicie a API**
+**Suba a API em container:**
 
 ```bash
-yarn docker:api
+docker build -t sigmabot-api .
+docker run --env-file .env -p 4000:4000 sigmabot-api
 ```
 
-#### 📄 Licença
+Ou use o `docker-compose` para subir tudo (MongoDB + API):
 
-Este projeto está licenciado sob a MIT License. Veja o arquivo [LICENSE](http://_vscodecontentref_/3) para mais detalhes.
+```bash
+docker-compose up --build
+```
 
-#### 👤 Autor
+> Você pode customizar as portas usando variáveis de ambiente `API_PORT` e `MONGO_PORT` ao rodar o `docker-compose`:
+>
+> - Linux/macOS: `API_PORT=5000 MONGO_PORT=28017 docker-compose up`
+> - Windows (cmd): `set API_PORT=5000 && set MONGO_PORT=28017 && docker-compose up`
+> - Windows (PowerShell): `$env:API_PORT=5000; $env:MONGO_PORT=28017; docker-compose up`
 
-Vitor Schneider - [GitHub](https://github.com/vnschneider)
-Gustavo PAssinho - [GitHub](https://github.com/gu5tvo)
+> **Atenção:**  
+> O arquivo `.env` **deve** estar presente na raiz do projeto para que a API funcione corretamente em Docker.
+
+---
+
+### 🔒 Segurança
+
+- Use sempre variáveis de ambiente para chaves e tokens sensíveis.
+- O webhook do Typebot exige autenticação HMAC.
+- Endpoints administrativos podem ser protegidos por autenticação via chat ou por IP/firewall.
+
+---
+
+### 📄 Licença
+
+Este projeto está licenciado sob a MIT License. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
+
+---
+
+### 👤 Autores
+
+- Vitor Schneider - [GitHub](https://github.com/vnschneider)
+- Gustavo Passinho - [GitHub](https://github.com/gu5tvo)
+
+---
+
+## 💡 Sugestões de Melhoria
+
+- Adicionar autenticação JWT para endpoints REST administrativos.
+- Implementar cache para buscas frequentes de FAQs.
+- Adicionar monitoramento de saúde (healthcheck) para API e banco.
+- Melhorar cobertura de testes automatizados.
+- Criar exemplos de integração com outros bots além do Typebot.
+- Adicionar suporte a múltiplos idiomas nas respostas da IA.
+- Automatizar deploy com CI/CD (GitHub Actions, etc).
