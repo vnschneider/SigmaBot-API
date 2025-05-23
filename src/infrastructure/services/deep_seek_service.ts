@@ -58,8 +58,16 @@ export class DeepSeekService {
 
       // NOVO: Verifica se já está aguardando atendente
       if (chatSession.waitingForHuman) {
+        console.log(`[DeepSeekService] Usuário em espera para humano:`, {
+          userPhone,
+          sessionId: chatSession.sessionId,
+          userQuestion,
+        });
         // Confirmação do usuário para transferência
         if (this.isConfirmation(userQuestion)) {
+          console.log(
+            `[DeepSeekService] Confirmação de transferência para humano recebida.`
+          );
           await ChatModel.findByIdAndUpdate(chatSession._id, {
             $set: { waitingForHuman: false, transferredToHuman: true },
           });
@@ -72,6 +80,9 @@ export class DeepSeekService {
             transferToHuman: true, // <-- Corrigido: sempre retorna true na confirmação
           };
         } else if (this.isCancel(userQuestion)) {
+          console.log(
+            `[DeepSeekService] Cancelamento de transferência para humano recebido.`
+          );
           await ChatModel.findByIdAndUpdate(chatSession._id, {
             $set: { waitingForHuman: false },
           });
@@ -84,6 +95,9 @@ export class DeepSeekService {
             transferToHuman: false,
           };
         } else {
+          console.log(
+            `[DeepSeekService] Aguardando confirmação do usuário para transferência para humano.`
+          );
           return {
             answer:
               "Só para confirmar, você deseja mesmo falar com um atendente humano? (Responda 'sim' para confirmar ou 'não' para cancelar)",

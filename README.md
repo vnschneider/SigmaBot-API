@@ -144,8 +144,7 @@ yarn docker:db
 **Suba a API em container:**
 
 ```bash
-docker build -t sigmabot-api .
-docker run --env-file .env -p 4000:4000 sigmabot-api
+yarn docker:api
 ```
 
 Ou use o `docker-compose` para subir tudo (MongoDB + API):
@@ -162,6 +161,25 @@ docker-compose up --build
 
 > **Atenção:**  
 > O arquivo `.env` **deve** estar presente na raiz do projeto para que a API funcione corretamente em Docker.
+
+## 🤝 Integração com Typebot  
+### **Configuração Básica**  
+**Variáveis Necessárias no Typebot**:  
+- `{{api_url}}`: URL da API (ex: `http://189.90.44.226:4000/api/typebot`).  
+- `{{user_phone}}`: Número do usuário (capturado automaticamente).  
+- `{{session_id}}`: ID de sessão (gerado na primeira resposta da API).  
+
+### **Passos Principais**  
+1. **Primeira Interação do Usuário**:  
+   - Gere um token HMAC (`POST /generate-hmac`).  
+   - Chame o webhook (`POST /webhook`) para obter resposta + `session_id`.  
+
+2. **Interações Seguintes**:  
+   - Reutilize `{{session_id}}` em chamadas para `POST /webhook`.  
+   - Mantenha o contexto da conversa via HMAC e sessão persistente.  
+
+**Documentação Detalhada**:  
+🔗 [Fluxo Completo no Notion](https://glossy-nutria-de0.notion.site/Documenta-o-do-Fluxo-SigmaBot-Typebot-1fc43104aa35806ca28ad52a47dfa80e?pvs=4) (inclui screenshots, exemplos de requisições e tratamento de erros).  
 
 ---
 
